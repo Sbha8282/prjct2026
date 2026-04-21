@@ -1,0 +1,443 @@
+
+{% extends "userpages/user_header_footer.html" %}
+{% block content %}
+{% load static %}
+
+
+<!-- Carousel Start -->
+<div class="container-fluid p-0">
+    <div class="owl-carousel header-carousel">
+
+        <!-- Slide 1 -->
+        <div class="owl-carousel-item position-relative">
+            <img src="{% static 'user_assets/img/nr.jpg' %}" class="carousel-img">
+
+            <div class="carousel-content">
+                <div class="glass-box">
+
+                    <h5 class="text-white fade-text delay-2">
+                        Welcome To local service finder
+                    </h5>
+
+                    <h1 class="text-white display-4 fw-bold fade-text delay-1">
+                        Smart Way, Easy Life
+                    </h1>
+
+                    <p class="text-white fade-text delay-2">
+                        Expert in Cleaning, Repair & Maintenance Services.
+                    </p>
+
+                    <div class="fade-text delay-3">
+                        <a href="#" class="btn btn-primary me-2 px-4 py-2">
+                            Read More
+                        </a>
+
+                        <a href="{% url 'services' %}" class="btn btn-primary me-2 px-4 py-2">
+                            Our Services
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="owl-carousel-item position-relative">
+            <img src="{% static 'user_assets/img/u.jpg' %}" class="carousel-img">
+
+            <div class="carousel-content">
+                <div class="glass-box">
+
+                    <h5 class="text-white fade-text delay-2"> Local service finder</h5>
+
+                    <h1 class="text-white display-4 fw-bold fade-text delay-1">
+                        Best Cleaning Solutions
+                    </h1>
+
+                    <p class="text-white fade-text delay-2">
+                        Reliable and affordable services for your home needs.
+                    </p>
+
+                    <div class="fade-text delay-3">
+                        <a href="{% url 'services' %}" class="btn btn-primary px-4 py-2">
+                            Book Now
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Carousel End -->
+
+
+<!-- CSS -->
+<style>
+/* Image full visible */
+.carousel-img {
+    height: 90vh;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Center content */
+.carousel-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 🔥 Glass Box */
+.glass-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+}
+
+/* Text shadow for visibility */
+.glass-box h1,
+.glass-box p {
+    text-shadow: 0px 2px 6px rgba(0,0,0,0.7);
+}
+
+/* Animation */
+.fade-text {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 1s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
+.delay-3 { animation-delay: 0.9s; }
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+</style>
+
+
+<!-- JS -->
+<script>
+$(document).ready(function(){
+
+    $('.header-carousel').owlCarousel({
+        items: 1,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 4000,
+        smartSpeed: 1000,
+        animateOut: 'fadeOut',
+        dots: true,
+        nav: false
+    });
+
+});
+</script>
+
+
+    <!-- Feature Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- Workers -->
+            <div class="col-md-6 col-lg-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="width:60px;height:60px;">
+                        <i class="fa fa-user-check fa-2x text-primary"></i>
+                    </div>
+                    <h1 class="text-primary counter" data-target="22" data-speed="120">0</h1>
+                </div>
+                <h5>Professional Workers</h5>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-6 col-lg-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="width:60px;height:60px;">
+                        <i class="fa fa-check fa-2x text-primary"></i>
+                    </div>
+                    <h1 class="text-primary counter" data-target="5" data-speed="200">0</h1>
+                </div>
+                <h5>Quality Services</h5>
+            </div>
+
+            <!-- Consultation -->
+            <div class="col-md-6 col-lg-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="width:60px;height:60px;">
+                        <i class="fa fa-drafting-compass fa-2x text-primary"></i>
+                    </div>
+                    <h1 class="text-primary counter" data-target="3" data-speed="220">0</h1>
+                </div>
+                <h5>Free Consultation</h5>
+            </div>
+
+            <!-- Support -->
+            <div class="col-md-6 col-lg-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="width:60px;height:60px;">
+                        <i class="fa fa-headphones fa-2x text-primary"></i>
+                    </div>
+                    <h1 class="text-primary counter" data-target="12" data-speed="150">0</h1>
+                </div>
+                <h5>Customer Support</h5>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Feature End -->
+
+
+<!-- About Start -->
+<div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
+    <div class="container about px-lg-0">
+        <div class="row g-0 mx-lg-0">
+
+            <div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute img-fluid w-100 h-100"
+                        src="{% static 'user_assets/img/about.jpg' %}"
+                        style="object-fit: cover;" alt="">
+                </div>
+            </div>
+
+            <div class="col-lg-6 py-5">
+                <div class="p-lg-5 pe-lg-0">
+
+                    <h1 class="mb-4">About Us</h1>
+
+                    <p class="mb-4">
+                        Home 2 Home provides trusted cleaning and carpenter services with reliable manpower.
+                    </p>
+
+                    <div class="row g-4">
+
+                        <!-- Happy Clients -->
+                        <div class="col-sm-6">
+                            <h2 class="text-primary counter" data-target="2205" data-speed="300">0</h2>
+                            <p>Happy Clients</p>
+                        </div>
+
+                        <!-- Services Done -->
+                        <div class="col-sm-6">
+                            <h2 class="text-primary counter" data-target="312" data-speed="250">0</h2>
+                            <p>Services Done</p>
+                        </div>
+
+                    </div>
+
+                    <a href="#" class="btn btn-primary mt-3 px-4 py-2">Explore More</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+<!-- CSS -->
+<style>
+.counter {
+    font-size: 50px;
+    font-weight: bold;
+}
+</style>
+
+
+<!-- 🔥 FINAL JS (SCROLL + REPEAT + SPEED CONTROL) -->
+<script>
+const counters = document.querySelectorAll('.counter');
+
+function animateCounter(counter) {
+    const target = +counter.getAttribute('data-target');
+    const speed = +counter.getAttribute('data-speed') || 200;
+
+    let count = 0;
+    const increment = target / speed;
+
+    const update = () => {
+        count += increment;
+
+        if (count < target) {
+            counter.innerText = Math.ceil(count);
+            requestAnimationFrame(update);
+        } else {
+            counter.innerText = target;
+        }
+    };
+
+    update();
+}
+
+// Scroll observer
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+
+            counter.innerText = '0'; // reset for repeat
+            animateCounter(counter);
+        }
+
+    });
+}, {
+    threshold: 0.6
+});
+
+counters.forEach(counter => {
+    observer.observe(counter);
+});
+</script>
+
+    
+    <!-- Service Start -->
+<!-- Service Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="section-title text-center">
+            <h1 class="display-5 mb-5">Our Services</h1>
+        </div>
+        <div class="row g-4">
+            {% for service in selected_services %}
+            <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.{{ forloop.counter0 }}s">
+                <div class="service-item">
+                    <div class="overflow-hidden">
+                        <img class="img-fluid" src="{{ service.img.url }}" alt="{{ service.Name }}" style="width: 100%; height: 100%;">
+                        <!-- Adjust the style as needed, setting max-width to 100% ensures proper fit -->
+                    </div>
+                    <div class="p-4 text-center border border-5 border-light border-top-0">
+                        <h4 class="mb-3">{{ service.Name }}</h4>
+                        <p>{{ service.Description|truncatewords_html:20 }}</p>
+                        <a class="fw-medium" href="{% url 'services' %}">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<!-- Service End -->
+
+    <!-- Service End -->
+
+
+    <!-- Feature Start -->
+    <div class="container-fluid bg-light overflow-hidden my-5 px-lg-0">
+        <div class="container feature px-lg-0">
+            <div class="row g-0 mx-lg-0">
+                <div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="p-lg-5 ps-lg-0">
+                        <div class="section-title text-start">
+                            <h1 class="display-5 mb-4">Why Choose Us</h1>
+                        </div>
+                        <p class="mb-4 pb-2">Home2Homeleverages India's vast population to provide essential domestic and office support services. With expertise and a dedicated team, we cover various needs, including housework, childcare, security, driving, and more, making us a valuable social service provider.</p>
+                        <div class="row g-4">
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+                                        <i class="fa fa-check fa-2x text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <p class="mb-2">Quality</p>
+                                        <h5 class="mb-0">Services</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+                                        <i class="fa fa-user-check fa-2x text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <p class="mb-2">Profestional</p>
+                                        <h5 class="mb-0">Workers</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+                                        <i class="fa fa-drafting-compass fa-2x text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <p class="mb-2">Free</p>
+                                        <h5 class="mb-0">Consultation</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-white" style="width: 60px; height: 60px;">
+                                        <i class="fa fa-headphones fa-2x text-primary"></i>
+                                    </div>
+                                    <div class="ms-4">
+                                        <p class="mb-2">Customer</p>
+                                        <h5 class="mb-0">Support</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 pe-lg-0" style="min-height: 400px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute img-fluid w-100 h-100" src="{% static 'user_assets/img/feature.jpg' %}" style="object-fit: cover;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Feature End -->
+
+
+  
+
+    <!-- Testimonial Start -->
+  
+    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="section-title text-center">
+                <h1 class="display-5 mb-5">Feedbacks</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel">
+                {% for feedback in feedbacks %}
+                <div class="testimonial-item text-center">
+                    {% with feedback.User.users_set.all|first as profile_user %}
+                        {% if profile_user and profile_user.profile_pic %}
+                            <img class="img-fluid bg-light p-2 mx-auto mb-3" src="{{ profile_user.profile_pic.url }}" style="width: 90px; height: 90px;">
+                        {% else %}
+                            <img class="img-fluid bg-light p-2 mx-auto mb-3" src="{% static 'user_assets/img/default_user_icon.jpg' %}" style="width: 90px; height: 90px;">
+                        {% endif %}
+                    {% endwith %}
+                    <div class="testimonial-text text-center p-4">
+                        <p>{{ feedback.Description }}</p>
+                        <h5 class="mb-1">{{ feedback.User.username }}</h5>
+                        <span class="fst-italic">{{ feedback.Employ.Name }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+{% endblock %}

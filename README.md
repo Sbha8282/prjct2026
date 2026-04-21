@@ -143,6 +143,309 @@ We welcome contributions to improve the Home Services Application. To contribute
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
+## System Architecture Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      HOME SERVICES APPLICATION                  │
+└─────────────────────────────────────────────────────────────────┘
+
+┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
+│   USER/CLIENT    │    │     WORKER       │    │      ADMIN       │
+│                  │    │                  │    │                  │
+│ • Browse Service │    │ • View Tasks     │    │ • Manage Users   │
+│ • Book Service   │    │ • Update Status  │    │ • Manage Workers │
+│ • View History   │    │ • View Feedbacks │    │ • Manage Service │
+│ • Give Feedback  │    │                  │    │ • Assign Worker  │
+└────────┬─────────┘    └────────┬─────────┘    └────────┬─────────┘
+         │                       │                        │
+         └───────────┬───────────┴────────────┬───────────┘
+                     │                        │
+              ┌──────▼─────────────────────────▼──────┐
+              │    Django Web Application Layer       │
+              │  • Views • Forms • URL Routing        │
+              └──────┬─────────────────────────────────┘
+                     │
+         ┌───────────▼────────────────┐
+         │  Database Layer            │
+         │  (SQLite/PostgreSQL)       │
+         │                            │
+         │  • Users • Workers         │
+         │  • Services • Requests     │
+         │  • Responses • Feedback    │
+         └────────────────────────────┘
+
+         ┌────────────────────────────┐
+         │   Static Files & Media     │
+         │   • CSS • JS • Images      │
+         └────────────────────────────┘
+```
+
+## ER Diagram (Database Schema)
+
+```
+User (Django Built-in)
+├── id (PK)
+├── username
+├── email
+└── password
+
+users (Custom User Profile)
+├── id (PK)
+├── admin_id (FK → User)
+├── contact_number
+├── Address
+├── gender
+├── profile_pic
+├── created_at
+└── updated_at
+
+workers
+├── id (PK)
+├── admin_id (FK → User, OneToOne)
+├── contact_number
+├── dob
+├── Address
+├── city
+├── gender
+├── designation
+├── profile_pic
+├── acc_activation
+├── avalability_status
+├── created_at
+└── updated_at
+
+Country
+├── id (PK)
+└── name
+
+State
+├── id (PK)
+├── country_id (FK → Country)
+└── name
+
+City
+├── id (PK)
+├── state (name)
+└── name
+
+ServiceCatogarys
+├── id (PK)
+├── img
+├── Name
+└── Description
+
+ServiceRequests
+├── id (PK)
+├── user_id (FK → users)
+├── Problem_Description
+├── service_id (FK → ServiceCatogarys)
+├── Address
+├── city_id (FK → City)
+├── pin
+├── House_No
+├── landmark
+├── contact
+├── status
+└── dateofrequest
+
+Response
+├── id (PK)
+├── requests_id (FK → ServiceRequests)
+├── assigned_worker_id (FK → workers)
+├── Date
+└── status
+
+Feedback
+├── id (PK)
+├── Rating
+├── Description
+├── User_id (FK → User)
+├── Employ_id (FK → workers)
+└── Date
+
+Profile
+├── id (PK)
+├── user_id (FK → User, OneToOne)
+└── forget_token
+```
+
+## Workflow / Process Diagram
+
+```
+USER WORKFLOW:
+──────────────
+         ┌──────────────┐
+         │   User Login │
+         └───────┬──────┘
+                 │
+                 ▼
+         ┌──────────────────┐
+         │ Browse Services  │
+         └───────┬──────────┘
+                 │
+                 ▼
+         ┌──────────────────┐
+         │ Select Service   │
+         └───────┬──────────┘
+                 │
+                 ▼
+         ┌──────────────────┐
+         │ Book Appointment │
+         └───────┬──────────┘
+                 │
+                 ▼
+         ┌──────────────────────────────┐
+         │ Service Request Created      │
+         │ (Status: Pending)            │
+         └───────┬──────────────────────┘
+                 │
+                 ▼
+     ┌───────────────────────────┐
+     │ Admin Assigns Worker      │
+     │ (Response Created)        │
+     └────────┬──────────────────┘
+              │
+              ▼
+     ┌─────────────────────────┐
+     │ Worker Completes Service│
+     │ (Status: Completed)     │
+     └────────┬────────────────┘
+              │
+              ▼
+     ┌─────────────────────────┐
+     │ User Gives Feedback     │
+     │ (Rating + Review)       │
+     └─────────────────────────┘
+
+WORKER WORKFLOW:
+────────────────
+         ┌──────────────┐
+         │Worker Login  │
+         └───────┬──────┘
+                 │
+                 ▼
+         ┌──────────────────┐
+         │View Assigned Tasks│
+         └───────┬──────────┘
+                 │
+      ┌──────────┴──────────┐
+      │                     │
+      ▼                     ▼
+ ┌──────────┐        ┌──────────────┐
+ │ Accept   │        │  Reject      │
+ │ Task     │        │  Task        │
+ └────┬─────┘        └──────┬───────┘
+      │                     │
+      ▼                     ▼
+ ┌──────────┐        ┌──────────────┐
+ │Complete  │        │Unassigned    │
+ │Service   │        │(For Re-assign)
+ └────┬─────┘        └──────────────┘
+      │
+      ▼
+ ┌──────────────┐
+ │View Feedback │
+ └──────────────┘
+
+ADMIN WORKFLOW:
+───────────────
+         ┌──────────────┐
+         │ Admin Login  │
+         └───────┬──────┘
+                 │
+        ┌────────┴────────┬──────────────┬────────────┐
+        │                 │              │            │
+        ▼                 ▼              ▼            ▼
+ ┌──────────────┐ ┌──────────────┐ ┌──────────┐ ┌──────────┐
+ │Manage Users  │ │Manage Workers│ │Manage    │ │Manage    │
+ │             │ │              │ │Services  │ │Location  │
+ └──────────────┘ └──────────────┘ └──────────┘ └──────────┘
+        │
+        ├─ View Requests
+        ├─ Assign Workers
+        ├─ View Responses
+        └─ View Feedbacks
+```
+
+## Data Dictionary
+
+| Table Name | Column Name | Data Type | Constraints | Description |
+|---|---|---|---|---|
+| **users** | id | Integer | PRIMARY KEY | Unique identifier for user |
+| | admin_id | Integer | FOREIGN KEY (User), NOT NULL | Reference to Django User |
+| | contact_number | String(13) | NOT NULL | Contact number of user |
+| | Address | Text | NOT NULL | Residential address |
+| | gender | String(250) | NOT NULL | Gender of user |
+| | profile_pic | File | NULLABLE | Profile picture upload |
+| | created_at | DateTime | AUTO_NOW_ADD | Record creation timestamp |
+| | updated_at | DateTime | AUTO_NOW | Last update timestamp |
+| **workers** | id | Integer | PRIMARY KEY | Unique identifier for worker |
+| | admin_id | Integer | FOREIGN KEY (User), ONE TO ONE, NOT NULL | Reference to Django User |
+| | contact_number | String(13) | NOT NULL | Contact number of worker |
+| | dob | Date | NULLABLE | Date of birth |
+| | Address | Text | NOT NULL | Residential address |
+| | city | String(255) | NOT NULL | City of work |
+| | gender | String(250) | NOT NULL | Gender of worker |
+| | designation | String(255) | NOT NULL | Job designation/title |
+| | profile_pic | File | NULLABLE | Profile picture upload |
+| | acc_activation | Boolean | DEFAULT: False | Account activation status |
+| | avalability_status | Boolean | DEFAULT: True | Availability for work |
+| | created_at | DateTime | AUTO_NOW_ADD | Record creation timestamp |
+| | updated_at | DateTime | AUTO_NOW | Last update timestamp |
+| **Country** | id | Integer | PRIMARY KEY | Unique identifier |
+| | name | String(150) | NOT NULL | Country name |
+| **State** | id | Integer | PRIMARY KEY | Unique identifier |
+| | country_id | Integer | FOREIGN KEY (Country) | Reference to Country |
+| | name | String(150) | NOT NULL | State/Province name |
+| **City** | id | Integer | PRIMARY KEY | Unique identifier |
+| | state | String(150) | NOT NULL | State name |
+| | name | String(150) | NOT NULL | City name |
+| **ServiceCatogarys** | id | Integer | PRIMARY KEY | Unique identifier |
+| | img | Image | NOT NULL | Service category image |
+| | Name | String(255) | NOT NULL | Service name |
+| | Description | Text | NOT NULL | Service description |
+| **ServiceRequests** | id | Integer | PRIMARY KEY | Unique identifier |
+| | user_id | Integer | FOREIGN KEY (users) | Reference to user requesting |
+| | Problem_Description | Text | NOT NULL | Description of service needed |
+| | service_id | Integer | FOREIGN KEY (ServiceCatogarys) | Reference to service category |
+| | Address | Text | NOT NULL | Service location address |
+| | city_id | Integer | FOREIGN KEY (City) | Reference to city |
+| | pin | String(10) | NOT NULL | Postal code |
+| | House_No | String(20) | NOT NULL | House number |
+| | landmark | Text | NULLABLE | Landmark for location reference |
+| | contact | String(200) | NOT NULL | Contact number |
+| | status | Boolean | DEFAULT: False | Request completion status |
+| | dateofrequest | DateTime | AUTO_NOW_ADD | Request creation timestamp |
+| **Response** | id | Integer | PRIMARY KEY | Unique identifier |
+| | requests_id | Integer | FOREIGN KEY (ServiceRequests) | Reference to service request |
+| | assigned_worker_id | Integer | FOREIGN KEY (workers) | Reference to assigned worker |
+| | Date | Date | AUTO_NOW | Assignment/update date |
+| | status | Boolean | DEFAULT: False | Completion status |
+| **Feedback** | id | Integer | PRIMARY KEY | Unique identifier |
+| | Rating | Integer | 0-5 Range, NOT NULL | Rating score (0 to 5) |
+| | Description | Text | NOT NULL | Feedback description |
+| | User_id | Integer | FOREIGN KEY (User) | Reference to user giving feedback |
+| | Employ_id | Integer | FOREIGN KEY (workers) | Reference to worker rated |
+| | Date | Date | NOT NULL | Feedback date |
+| **Profile** | id | Integer | PRIMARY KEY | Unique identifier |
+| | user_id | Integer | FOREIGN KEY (User), ONE TO ONE | Reference to User |
+| | forget_token | String(1000) | NOT NULL | Password reset token |
+
+## Conclusion
+
+The Home Services Application provides a comprehensive platform that seamlessly connects users, service providers (workers), and administrators in a unified ecosystem. The application is built on a robust Django framework with a well-structured database design that ensures data integrity and optimal performance.
+
+### Key Achievements:
+
+- **Multi-role Architecture**: Supports distinct workflows for users, workers, and administrators
+- **Complete Service Lifecycle**: From service discovery to completion and feedback
+- **Location-based Services**: Integration with country, state, and city hierarchies
+- **Quality Assurance**: Built-in feedback and rating system for quality control
+- **Scalable Design**: Modular structure allowing easy expansion and feature additions
+
+The application successfully bridges the gap between service seekers and qualified service providers, creating a user-friendly and professional platform that enhances the home services industry.
+
 ## Contact
 
 For any questions or feedback, please reach out to [your-email@example.com](mailto:your-email@example.com).

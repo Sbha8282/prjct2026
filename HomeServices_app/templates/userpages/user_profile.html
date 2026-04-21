@@ -1,0 +1,134 @@
+
+{% extends "userpages/user_header_footer.html" %}
+{% block content %}
+{% load static %}
+<section class="py-5" style="background-color: #f4f5f7;">
+    <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">My Profile</h2>
+                <p class="text-muted mb-0">View your account details and track service status.</p>
+            </div>
+            <a href="{% url 'Viewappointment_history' %}" class="btn btn-primary btn-sm mt-3 mt-md-0">View Appointments</a>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body text-center">
+                        <img src="{{ data.profile_pic.url }}" alt="Avatar" class="rounded-circle mb-3" style="width: 140px; height: 140px; object-fit: cover;">
+                        <h4 class="fw-bold mb-1">{{ data.admin.first_name }} {{ data.admin.last_name }}</h4>
+                        <p class="text-muted mb-3">{{ data.admin.username }}</p>
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'userprofile' %}" class="btn btn-outline-primary btn-sm">Edit Profile</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0 mt-4">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-3">Service Summary</h5>
+                        <div class="row text-center gy-3">
+                            <div class="col-6">
+                                <div class="bg-light rounded p-3">
+                                    <div class="text-muted small">Total</div>
+                                    <div class="fs-4 fw-bold">{{ total_requests }}</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="bg-light rounded p-3">
+                                    <div class="text-muted small">Pending</div>
+                                    <div class="fs-4 fw-bold text-warning">{{ pending_count }}</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="bg-light rounded p-3">
+                                    <div class="text-muted small">Completed</div>
+                                    <div class="fs-4 fw-bold text-success">{{ completed_count }}</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="bg-light rounded p-3">
+                                    <div class="text-muted small">Unassigned</div>
+                                    <div class="fs-4 fw-bold text-secondary">{{ unassigned_count }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="fw-semibold mb-4">Account Information</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label text-muted">Email</label>
+                                <div class="form-control bg-light">{{ data.admin.email }}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-muted">Phone</label>
+                                <div class="form-control bg-light">{{ data.contact_number }}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-muted">Member Since</label>
+                                <div class="form-control bg-light">{{ data.admin.date_joined|date:"F j, Y" }}</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label text-muted">Gender</label>
+                                <div class="form-control bg-light">{{ data.gender }}</div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text-muted">Address</label>
+                                <div class="form-control bg-light">{{ data.Address }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-0 h-100">
+                            <div class="card-body">
+                                <h6 class="fw-semibold mb-3">Pending Services</h6>
+                                <ul class="list-group list-group-flush">
+                                    {% if pending_services %}
+                                        {% for response in pending_services %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span>{{ response.requests.service.Name }}</span>
+                                                <span class="badge bg-warning text-dark">{{ response.requests.dateofrequest|date:"M j" }}</span>
+                                            </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li class="list-group-item text-muted">No pending services.</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm border-0 h-100">
+                            <div class="card-body">
+                                <h6 class="fw-semibold mb-3">Completed Services</h6>
+                                <ul class="list-group list-group-flush">
+                                    {% if completed_services %}
+                                        {% for response in completed_services %}
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span>{{ response.requests.service.Name }}</span>
+                                                <span class="badge bg-success">{{ response.requests.dateofrequest|date:"M j" }}</span>
+                                            </li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li class="list-group-item text-muted">No completed services yet.</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

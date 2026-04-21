@@ -1,0 +1,48 @@
+// Architecture Diagram
+digraph {
+	A [label="User/Client"]
+	B [label="Login/Register"]
+	C [label="Home Page"]
+	D [label="Browse Services"]
+	E [label="Book Service"]
+	F [label="Appointment History"]
+	G [label=Feedback]
+	H [label=Worker]
+	I [label="Login/Register"]
+	J [label="Worker Home"]
+	K [label="View Assigned Tasks"]
+	L [label="Mark Completed/Reject"]
+	M [label="View Feedbacks"]
+	N [label=Admin]
+	O [label=Login]
+	P [label="Admin Dashboard"]
+	Q [label="Manage Users"]
+	R [label="Manage Workers"]
+	S [label="Manage Services"]
+	T [label="Manage Locations"]
+	U [label="View Requests"]
+	V [label="Assign Workers"]
+	W [label="View Responses"]
+	X [label="View Feedbacks"]
+	A -> B
+	B -> C
+	C -> D
+	D -> E
+	E -> F
+	F -> G
+	H -> I
+	I -> J
+	J -> K
+	K -> L
+	L -> M
+	N -> O
+	O -> P
+	P -> Q
+	P -> R
+	P -> S
+	P -> T
+	P -> U
+	P -> V
+	P -> W
+	P -> X
+}

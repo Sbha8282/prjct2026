@@ -1,0 +1,2112 @@
+MACHINE LEARN ING  
+ 
+A PROJECT  REPORT  
+ 
+ 
+Submit ted by 
+Rajpurohit Pravinsingh V  
+210750 10703 5 
+In partial  fulfillment  for the award  of the degree  of 
+BACHELOR  OF ENGINEERING  
+in 
+Computer  Engineering  Department  
+Shankersinh  Vaghela  Bapu  Institute  of Technology,  Gandhinagar  
+ 
+ 
+ 
+ 
+ 
+Gujarat  Technological  University,  Ahmedabad 
+April 2025  
+ 
+ 
+ 
+ 
+Shankersinh  Vaghela  Bapu  Institute  of Technology  
+Gandhinagar -Mansa  Highway,  Vasan,  Gandhinagar –382650  
+ 
+ 
+CERTIFICATE  
+ 
+ 
+ 
+This is to certify that the project report submitted along with the project entitled  House 
+Price Prediction   has been carried out by  Rajpurohit Pravinsingh V   under my 
+guidance in partial fulfillment for the degree of Bachelor of Engineering in Computer 
+Engineering Department , 8th Semester of  Gujarat Technological University, 
+Ahmedabad during the academic year 2024 -25. 
+ 
+ 
+ 
+ 
+ 
+  Prof. Nirali Patel  Prof. Samina Mansuri  
+Internal Guide  Head of Department  
+
+Completion  Certificate  
+ 
+Training Letter Head  
+ 
+Date: 05/04/2025  
+ 
+TO WHOM IT MAY CONCERN  
+ 
+ 
+ 
+This is t o clarify that Rajpurohit Pravinsingh V , a student of Shankersinh Vaghela Bapu 
+Institute of Technology has successfully completed his Training Program in the field of 
+Machine Learning from 19 -01-2025 to 19 -04-2025 (Total Number of Weeks: -12) under 
+the guidance  of                                                     Kishore.  
+ 
+ 
+During the period of his Training with us, he had been exposed to different processes 
+and was found diligent, hardworking and inquisitive.  
+ 
+ 
+ 
+We wish him every success in his life and career.  
+ 
+ 
+ 
+For 1Stop.ai  
+ 
+Authorised Signature with Industry Stamp  
+ 
+ 
+ 
+ 
+ 
+Shankersinh  Vaghela  Bapu  Institute  of Technology  
+Gandhinagar -Mansa  Highway,  Vasan,Gandhinagar –382650  
+ 
+ 
+DECLARATION  
+ 
+ 
+We hereby declare that the Internship report submitted along with the Internship  project  
+entitled  House Price Prediction   submitted in partial fulfillment  for the degree of 
+Bachelor of engineering in  Computer  Engineering  to Gujarat  Technological U niversity, 
+Ahmedabad, is a bona fide record of original work  carried ou t by me at 1stop.ai  under the 
+supervision of  Seema Reshmi and that no part of this report has been directly copied from 
+any students’  report  or taken  from  any other source, without providing due reference.  
+                                                                                                    
+ 
+ 
+Rajpurohit Pravinsingh V  
+Name of Student  Sign of Student
+
+GTU  
+ SVBIT  
+ ⅰ  ACKNOWLEDGEMENT  
+II wish to express my sincere gratitude to my External guide Seema Reshmi for 
+continuously guiding me at the company and  answering all my doubts with patience. I 
+would also li ke to thank Prof. Samina Mansuri  (H.O.D. of BE, BE(CE) / IT 
+Department) for motivating me every time whenever I get confused, I would also like 
+to thank my Internal Gu ide Prof. Nirali Patel  for helping  me through my internship by 
+giving me the necessary suggestions and advices along with their valuable co -
+ordination in completing this Internship.  
+I also thank my parents, friends and all the members of the family for their precious 
+support and encourage ment which they had provided in completion of my work. In 
+addition to that, I would also like to mention the company personals who gave me the 
+permission to use and experience the valuable resources required for the Intern ship.  
+Thus, in conclusion to the above said, I once again thank the staff members of 1stop.ai 
+for their valuable support in completion of the Internship.
+GTU  SVBIT  
+ ⅱ  ABSTRACT  
+ 
+Accurate prediction of house prices is a key challenge in the real estate industry, where 
+numerous factors such as location, property size, age, number of rooms, proximity to 
+amenities, and neighborhood quality influence the market value of a property. This 
+project presents a comprehensive machine le arning approach to house price prediction 
+using structured data. The process begins with data collection from various reliable 
+sources, followed by data cleaning, preprocessing, and exploratory data analysis to 
+identify patterns and correlations. Feature e ngineering is performed to enhance model 
+input quality, and multiple machine learning algorithms —such as Linear Regression, 
+Random Forest, and Gradient Boosting —are applied and compared. The models are 
+evaluated based on performance metrics like RMSE (Root  Mean Square Error) and R² 
+score to ensure optimal prediction accuracy. After fine -tuning, the best -performing model 
+is selected, deployed, and integrated into a user -accessible interface for real -time 
+predictions. The project not only provides valuable in sights into the housing market 
+trends but also demonstrates the potential of data -driven decisi on-making in property 
+valuation s
+GTU  SVBIT  
+ⅲ  LIST  OF FIGURES  
+Figure 2.1Process Flowchart…  ................................ ................................ ..............................  4 
+Figure3.1  Database explanation … ................................ ................................ .........................  6 
+Figure3.2 Duplicate  Value  Verification…  ................................ ................................ ...............  7 
+Figure3. 3bar chart of number of bedrooms … ................................ ................................ ....... 8 
+Figure 3.4 barchart of number of bathrooms … ................................ ................................ ...... 8 
+Figure3.5 barchart of pricce … ................................ ................................ ...............................  9 
+Figure3.6 correaltion heatmap … ................................ ................................ .........................  10 
+Figure 3.7 flowchart of feature engineer … ................................ ................................ .........  11 
+Figure3.8 MissingValue Verification…  ................................ ................................ .................  12 
+Figure 3.9 Ensuring Data Consistency : Standardisation Process ................................ ..........  12 
+Figure3.10 VisualizingOutliers:BoxPlot  For price … ................................ .............................  13 
+Figure3.11 OutlierVisualisation:BoxPlots  for size… ................................ .............................  13 
+Figure 3.12 Outerlier:  Boxplot for bedrooms … ................................ ................................ ... 14 
+Figure3.13corelation heatmap  ................................ ................................ ..............................  15 
+Figure 3.14 feature importance score … ................................ ................................ ...............  16 
+Figure3.15 Types  of Machine  Learnings…  ................................ ................................ ...........  17 
+Figure 3.16  The Roadmap of Supervised Learning:Process Overview…  .............................  19 
+Figure3.17 RegressionAnalysisVisualised:Understanding  Relationship…  .............................  20 
+Figure3.18 ClassificationAnalysis:AVisual  Overvie w… ................................ ......................  20 
+Figure 3.19  Scatter Plot Analysis:Informing Regression Selection…  ................................ ... 20 
+Figure 3.20  Regression Model Selection Overview…  ................................ ..........................  21 
+Figure3.21 ScatterPlot  Analysis:  Actual  vs. Predicted  Values  for Linear  Regression…  .........  23 
+Figure3.22 support vector machine : Scatter Plot For Actual vs. Predicted Values…  ............  25 
+Figure3.23decision tree regresion : Scatter  Plot of Actual  vs .Predicted  Values…  ................  27 
+Figure3.24 Actual  vs Predic ted Values: Random forest regression Scatter Plot ......................  29 
+Figure3.25 Actual  vs Predicted  Values :XGBoost Scatter  Plot…  ................................ ..........  31 
+Figure 3.26 Actual vs. Predicted Values :polynomial regression  ................................ .............  33 
+Figure3.27  Actual vsPredicted Scatter Plot : model selection work flow ………………… …34 
+GTU  
+ SVBIT  
+ ⅳ  Figure3.28 ModelDeployment:Launching  House  Sales  Prediction  Web  Interface…  .............  37 
+Figure3.29 WebPage  Display:   Prediction  Output…  ................................ .............................  49 
+GTU  
+ SVBIT  
+ ⅴ  LIST  OF TABLES  
+Table3.1Database Explanation…  ................................ ................................ ...........................  6 
+Table3.2Model  Comparison…  ................................ ................................ .............................  32 
+GTU  
+ SVBIT  
+ ⅵ  TABLE  OF CONTENTS  
+ 
+Acknowledgement  ................................ ................................ .............................  ⅰ 
+Abstract  ................................ ................................ ................................ .............  ⅱ 
+List Of Figures  ................................ ................................ ................................ .. ⅲ 
+List Of Tables  ................................ ................................ ................................ .... ⅴ 
+Table  Of Contents  ................................ ................................ ............................. ⅵ 
+1. Introduction ................................ ................................ ................................ .... 1 
+     Company Overview  ................................ ................................ ................................ . 1 
+ Project Overview…  ................................ ................................ ................................ . 2 
+ Project Goal…  ................................ ................................ ................................ ........  2 
+ Project Objectives…  ................................ ................................ ...............................  3 
+2. Implementation  Stage  ................................ ................................ ....................  4 
+ Project Flow…  ................................ ................................ ................................ .........  4 
+3. Progress  Work  ................................ ................................ ...............................  5 
+ Database  ................................ ................................ ................................  5 
+ Data Collection…  ................................ ................................ ..........................  5 
+ Database Explanation…  ................................ ................................ .................  5 
+ Data Pre -Processing…  ................................ ................................ ...................  6 
+ Exploratory  Data  Analytics  ................................ ................................ .... 7 
+        Data Analysis And Visualization…  ................................ ................................ 7 
+ Feature  Engineering  ................................ ................................ .............  11 
+        Feature Transformation…  ................................ ................................ .............  11 
+                                              Handle  Missing  Values  ................................ ................................ ...............  11 
+                                              Scaling  Method  ................................ ................................ .........................  12 
+                                              Encoding  Technique  ................................ ................................ ...................  13 
+                                              Outliers  Handling  Technique  ................................ ................................ ..... 13 
+ Feature Selection…  ................................ ................................ ....................  14 
+ Feature Importance…  ................................ ................................ ................. 16 
+ Machine  Learning  ................................ ................................ .................  17 
+ Introduction of Machine Learning… ................................ ............................  17 
+ Types  Of Machine  Learning…  ................................ ................................ .... 17 
+ Supervised Learning…  ................................ ................................ ...............  19 
+ Why Regression?.  ................................ ................................ ........................  20 
+ Regression…  ................................ ................................ ...............................  21 
+ Linear  Regression  ................................ ................................ ................  22 
+                                                     Support  Vector  Regression  ................................ ................................ ... 24 
+                                                    Decision  Tree Regression ................................ ................................ ..... 26                                                    
+Random  Forest  Regression  ................................ ................................ . 28 
+GTU  
+ SVBIT  
+ ⅵ   Extreme  Gradient  Boost  Regression  ................................ ................................ ...... 30 
+ Polynomial Regresion … ................................ ................................ .............  32 
+ model selection workflow  ................................ ................................ ...........  34 
+ summary  ................................ ................................ ................................ .... 36 
+4. Project  Limitations  ................................ ................................ .......................  42 
+5. Appendices  ................................ ................................ ................................ .. 43 
+6. Conclusion  And Future  work  ................................ ................................ ....... 51 
+ Conclusion…  ................................ ................................ ................................ .... 51 
+ Future Work…  ................................ ................................ ................................ .. 51 
+Refer ences  ................................ ................................ ................................ .......52 
+776388  INTRODUCTION  
+GTU  
+ SVBIT  
+ 1  
+  
+1. INTRODUCTION  
+ 
+ COMPANY  OVERVIEW:  
+ 
+Company  Name :1stop.ai  
+ 
+Contact No : 7619186427  
+ 
+Email Id: hrteam@movidu.in  
+ Website : https:// www.1stop.ai  
+External Guide Name : Seema Reshmi  
+Brief Introduction about Company : 
+1Stop.ai is a technology -driven company that specializes in artificial intelligence (AI) 
+solutions. Their core mission is to make AI more accessible, practical, and scalable for 
+businesses across a variety of industries. 1Stop.ai is a forward -thinking artificial 
+intelli gence company dedicated to making AI accessible and impactful for businesses of 
+all sizes. The company provides a comprehensive AI -as-a-Service (AIaaS) platform that 
+enables organizations to seamlessly integrate artificial intelligence into their operation s 
+without requiring deep technical expertise.  
+ 
+1Stop.ai is a leading Indian EdTech company focused on transforming traditional 
+education through a practical, industry -aligned learning model. The company operates at 
+the intersection of education and technology, aiming to bridge the skills gap between 
+academia and the rapidly evolving demands of the tech industry. The platform is 
+especially popular among engineer ing students and early -career professionals across 
+India, offering flexible remote internships, certified training programs, and expert 
+mentorship. With partnerships that include prestigious institutions like IIT Roorkee and 
+IIT Bombay, the company brings real credibility and high -impact learning opportunities 
+to its user base
+776388  INTRODUCTION  
+GTU  
+ SVBIT  
+ 2  
+  
+ PROJECT  OVERVIEW:  
+ 
+● This project focuses on developing a robust predictive mod el for House price 
+prediction , aiming to provide accurate forecasts of sales volumes for various real-
+estate  products.  
+ 
+● Leveraging data analysis and machine learning techniques, I aim to address the 
+challenges posed by the d ynamic nature of the house  market, including seasonality, 
+market trends, and promotional activities.  
+ 
+● By analysing comprehensive datasets comprising historical sales records, product 
+attributes, market dynamics, and external factors, I  seek to uncover  in sights  into 
+sales patterns and drivers.  
+ 
+● The project encompasses key stages such as  data collection,  exploratory  data 
+analysis (EDA), feature engineering, model building, evaluation, and deployment.  
+ 
+● Ultimately, the goal is to empower st akeholders in the real -estate  industry with 
+actionable insights and predictive capabilities to optimise inventory management, 
+resource allocation,  and decision -making processes.  
+. 
+ 
+ 
+ 
+ PROJECT  GOAL:  
+ 
+● The goal of the House sales prediction project is to develop a predictive mode l that 
+accurately forecasts house  sales based on historical data and relevant features.  
+ 
+● The ultimate objec tive is to assist real-estate  companies in  optimizing their sales 
+strategies, inventory management, and resource allocation, thereby enhancing 
+efficiency and profitability in the industry.  
+ 
+● By leveraging advanced machine learning techniques, the project aims to provide 
+actionable insights into sales trends, customer behaviour, and market dynamics, 
+ultimately contributing to informed decision -making and improved business 
+performance in the real -estate  sector.  
+776388  INTRODUCTION  
+GTU  
+ SVBIT  
+ 3  
+  
+ PROJECT  OBJECTIVES:  
+ 
+● Develop a user -friendly in terface tailored for customer who wants to buy house , 
+facilitating streamlined inventory management, efficient resource allocation, and 
+strategic planning.  
+● Generate various types of visualisations, including line charts, bar charts, and 
+scatter plots, to enable in -depth analysis and decision -making. The report and 
+statistical analysis  provided  will assist  vendor . 
+● These features may include predictive analytics for sales forecasting, identifying 
+market trends, and optimising pricing strategies.  
+● Implement ad vanced machine learning algorithms to enhance predictive analytics 
+capabilities, allowing for accurate forecasting of future sales demand based on 
+historical data and relevant features.  
+ 
+● Enable the calculation of sales metrics and optimal order quantities for future stock 
+management.  
+ 
+● Deploy the predictive model in a production environment, integrating  it with 
+existing sales forecasting systems and workflow  
+776388  
+ 
+ IMPLEMENTATION  STAGE  
+GTU  
+ SVBIT  
+ 4  
+ 
+ 
+2. IMPLEMENTATION  STAGE  
+ Project  Flow : 
+Step1 :Gather  historical  sales  data from  various  sources,  including  internal  database  
+and external market research reports.  
+ 
+Step2 :Clean and process data to handle missing value, outliers and inconsistencies.  
+ 
+Step3 : Analyse   the distribution  of sales  data overtime  then identify  correlations  
+between sales and various factors such as seasonality etc.  
+ 
+Step4 :Feature   Engineering  is applied  to extract  relevant  features  from  the dataset  
+and engineer new features of external factors of sales.  
+ 
+Step5 : Evaluate  different  machine  learning  algorithms such as linear  
+regression,regularization,rideg regression  
+ 
+Step6 :Compare  different  models  and select  the final ridge regression model . 
+ 
+Step 7 :Deploy Machine Learning Model using Python Libraries such as Streamlit.  
+ 
+ 
+ 
+       Figure2.1Process  Flowchart  
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 5  
+  
+3. PROGRESS  WORK  
+ 
+ DATABASE:  
+ 
+ DATA COLLECTION:  
+ 
+● Gather historical sales data from various sources  and collect  Additional  data that 
+may influence sales.  
+● Employ the Pandas library to manage the  collected  data effectively.  Pandas  
+facilitates the ingestion, manipulation, and analysis of structured data, ensuring 
+seamless integration and processing.  
+● Pandas library is used to show gathered data which reads the contents of a CSV file 
+into a  DataFrame.  
+ 
+ 
+ DATABASE EXPLANATION:  
+  beds  
+ Number of bedrooms in the house. Typically correlates with house size and 
+price.  
+  baths  
+ Number of bathrooms in the house. Includes both full and partial baths.  
+  size 
+ Size of the house in square feet. A major factor affecting price.  
+  zip_code  
+ The ZIP code where the property is located. Useful for capturing location -
+based price variation.  
+  price  
+ Target variable: Th e sale price of the house in rupees . 
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 6  
+  
+Column  Name  Description  Type  
+Bedroom  Number of bedrooms  integer  
+Bathroom  Number of bathroom  float64  
+size Area of house  float64  
+Zip_code  Postal code of city  Float64  
+price  Price of house  Float64 
+ 
+ 
+         Table3.1Database Explanation  
+ 
+ 
+ 
+ DATA  PRE -PROCESSING:  
+● Identify and address missing values in the dataset by either replacing them with 
+appropriate values (such as the mean, median, or mode) or removing the rows or 
+columns containing missing data. This ensures that missing values do not affect the 
+analysis.  
+● Detects outliers in the dataset that may significantly deviate from the rest of the data 
+and potentially skew the analysis. Outliers can be identified using statistical  
+methods such asz -score  or visualization techniques  like boxplots  .Once  identified,  
+outlie rs can be either removed from the dataset or  adjusted  appropriately  to 
+minimize their impact on the analysis.  
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 7  
+ ● Check the dataset for duplicate values, which can 
+distort the analysis and lead to biassed results. Duplicate values may  arise  due to data 
+entry  errors  or system  glitches. It's essential to identify and eliminate duplicate values 
+from the dataset to ensure the accuracy and integrity of the analysis.  
+ 
+ 
+ EXPLORATORY  DATA  ANALYTICS:  
+● Exploratory Data  Analysis  (EDA)  serves  as the founda tional  step in understanding  
+the underlying structure of house  sales data.  
+● Through EDA, we aim to gain valuable insights into the factors influencing sales 
+trends, identify patterns, anomalies, and relationships within the data, and inform 
+subsequent modelling and decision -making processes.  
+ 
+ 
+ DATA  ANALYSIS  AND  VISUALISATION : 
+● I conduct a detailed temporal analysis to uncover trends, seasonality, and periodic 
+patterns in sales volumes. Time -series plots, seasonal decomposition techniques, 
+and trend analy sis are employed to visualise and interpret sales trends over 
+timeaccurately.  
+● EDA leverages a variety of visualisation techniques, including histograms,  
+boxplots, line charts, and heatmaps, to visualise the distribution of sales data, detect 
+outliers,  and explore  relationships  between  variables  visually  .Visualisations  help 
+communicate insights effectively and facilitate data -driven decision -making.  
+ 
+ 
+ Bedrooms Distribution  
+Most homes in the dataset have between 2 to 4 bedrooms, with 3 -bedroom homes 
+being th e most common. A  smaller number of homes have either very few (0 –1) 
+or a high number (5+) of bedrooms, which could represent studio apartments or 
+large multi -family properties, respectively. This bell -shaped distribution indicates 
+that the dataset primari ly includes typical mid -sized family homes, which provides 
+a good base for generalized price predictions . 
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 8  
+  
+Figure3. 3bar chart of number of bedrooms  
+ Bathrooms Distribution  
+Bathroom count also follows a similar pattern. The majority of homes offer 1 to 3 
+bathrooms, with fewer listings on the extreme ends. Properties with many 
+bathrooms —especially those with more than 5 —are likely luxury homes and 
+contribute to the skew in the distribution. It's important to note that bathroom 
+count may also include partial  baths, w –hich adds nuance to the interpretation. 
+Homes with more bathrooms generally have higher prices and correlate with both 
+size and bedroom count.            
+ 
+Figure 3.4 bar  chart of number of bathrooms  
+ 
+ House Price Distribution  
+The price  column —our target variable —is highly right -skewed. The bulk of 
+houses are priced below $1 million, with a long tail extending into the multi -
+million -dollar range. These high -end homes could reflect premium real estate 
+markets or rare features, making them useful but potentially influential outliers. 
+Log transformation may also be applied here to improve model performance and 
+reduce sensitivity to extreme values.  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 9  
+  
+Figure3.5 barchart of price  
+ 
+ Price by ZIP Code  
+The zip_code  feature, while categorical, offers valuable location -specific 
+information. When we plot the average house price for each ZIP code, clear 
+geographic trends emerge. Some ZIP codes command significantly higher average 
+prices, indicating more affluent or desi rable areas. These regional differences 
+underscore the importance of location in real estate valuation and support the 
+inclusion of zip_code  as a critical feature in our prediction model. It may be 
+beneficial to encode this variable carefully, possibly usi ng target or frequency 
+encoding.  
+ Property Size (Square Feet)  
+The size  column, representing the area of a home in square feet, shows a right -
+skewed distribution. Most homes are in the 1,000 to 2,500 sq. ft. range, aligning 
+with typical suburban or urban fam ily homes. However, there are a few outliers 
+exceeding 5,000 sq. ft., representing luxury estates. These large properties can 
+significantly influence metrics like the mean and may warrant transformations or 
+normalization in later modeling steps. A log tran sformation is commonly used to 
+stabilize variance and reduce skewness in such cases.  
+Summary of Insights  
+EDA has revealed several crucial insights. The dataset is clean with no missing values, 
+and the variables exhibit reasonable distributions with a few influential outliers. The 
+strongest predictors of price appear to be size, followed by the number of bathr ooms and 
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 10  
+ bedrooms. Location also plays a significant role, as demonstrated by the ZIP code -based 
+price variations. These insights not only guide feature selection and transformation but 
+also ensure that the model is grounded in real -world trends and logic.  
+                                  
+ 
+Figure3.6 correaltion heatmap  
+ 
+ 
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 11  
+ 
+  
+FEATUREENGINEERING:  
+ 
+● Feature Engineering is used to efficiently preprocess the dataset and engineer 
+informative  features  that enhance the predictive power of machine learning models 
+for house sales prediction.  
+● The goal is to improve model accuracy by providing more meaningful and relevant 
+information.  
+ 
+ 
+ 
+ 
+Feature3.7 Flowchart  Of Feature  Engineering  Integration  
+ 
+ 
+ 
+● Feature  Engineering  Process:  
+1. Feature Transformation  
+2. Feature Construction  
+3. Feature Selection  
+4. Feature Importance  
+ 
+  
+ Feature  Transformation:  
+● Feature Transformation refers to the process of converting or modifying 
+existing features (variables) in a dataset  to make  them  more  suitable  for 
+analysis  or modelling. This is done to ensure that the model can effectively 
+learn from the data.  
+  
+ Handling Missing Values : 
+● Understanding dataset nature,and checking whether  the dataset  contains  empty  
+values and replacing them appropriately. Common strategies include filling 
+missing values with the mean, median, or mode of the respective feature.  
+ 
+ 
+ 
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 12  
+ 
+                                                         
+ 
+     Fig3.8 Missing  Value  Verification  
+ 
+ 
+ 
+ 
+ Scaling Method:  
+● Scaling methods normalise the features of a dataset, ensuring that they are on a  
+similar scale. Scaling methods involve techniques such as min -max scaling and 
+standardisation. To perform standardisation, I’ve calculated the mean and 
+standard deviation of the features within the dataset.  
+ 
+● This process  ensures  that the scaled  features  have  a mean  of 0 and a standard 
+deviation of 1.  
+ 
+ 
+Fig 3.9 Ensuring  Data Consistency : Standardisation  Process  
+  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 13  
+  Encoding Technique:  
+● Encoding techniques in feature transformation, which convert categorical data 
+into numerical form. Utilised label encoding for the target column and output is 
+easily given as input in the machine learning model.  
+ 
+ Outlier Handling Technique : 
+1. Identifying Outliers using Box Plots:  
+● Identification : In a box plot, outliers are data points that fall outside the  
+whiskers  of the plot, which extend to the upper and lower quartiles. They are 
+represented as individual points beyond the whiskers.  
+● The dataset contains noticeable outliers in features like price  and size, with a few 
+homes priced above $2 million and sizes  exceeding 5,000 sq. ft. These extreme values 
+can skew model results, especially in linear models. Outliers in beds  and baths  (e.g., 0 
+or 10 bedrooms) may indicate rare cases or data entry issues. Handling them through 
+capping, transformation, or removal i s essential for accurate predictions.  
+ 
+● Visual Inspection: By visually inspecting the box plot, I’ve identified 
+potential outliers that lie far from the bulk of the data.  
+ 
+Figure3.10VisualizingOutliers:BoxPlotFor  price  
+                                                                      
+ 
+ 
+Figure 3.12 Outerlier:Boxplot for bedrooms  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 14  
+  
+  
+Figure 3.12 Outerlier: Boxplot for bedrooms  
+●  
+● I ‘ve implemented box plots to identify any unusual patterns or extreme values 
+that could indicate outliers.  
+2. Removing  Outliers  using  the Interquartile  Range(IQR) Method:  
+● The Interquartile Range (IQR) is a measure of statistical dispersion, calculated  
+as the difference between the third quartile (Q3) and the first quartile (Q1) of 
+the dataset.  
+● Outliers are identified and removed ba sed on their deviation from the IQR. 
+Datapoints that fall below Q1−1.5×IQR or above Q3+1.5×IQR are considered 
+outliers and are removed from the dataset.  
+● Implementation:  
+ Calculate Q1(thefirstquartile)and Q3(thethirdquartile)ofthe dataset.  
+ ComputetheIQR IQR= Q3−Q1. 
+ Lower range Outlier = Q1-1.5*IQR >Outlier,  
+ Higher range Outlier = Outlier > Q3+1.5*IQR  
+ Remove the identified outliers from the dataset.  
+ 
+ 
+ Feature  Selection:  
+ Selected Features for Modeling  
+1. beds  – Moderate correlation with price; helps estimate property size and utility.  
+2. baths  – Stronger correlation than beds; reflects comfort and home value.  
+3. size  – Highly correlated with price; larger homes generally cost more.  
+4. zip_code  – Captures location, a ma jor determinant of house prices.  
+ 
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 15  
+ ● However, categorical encoding will be required for zip_code  (e.g., target encoding  or 
+one-hot encoding )Additionally, correlation filters are applied between pairs of features. 
+Based on the results of these methods, the most relevant features are selected for the 
+model. Examples include correlation analysis, chi -square test, and information gain.  
+● Correlation  Coefficient:  
+Correlation Coefficient measures the strength and direction of the linear 
+relationship between two vari ables. In the context of feature selection, correlation 
+coefficient is used to quantify the relationship between each feature and the target 
+variable.  
+ 
+The correlation  coefficient  ranges from -1to 1 
+ 
+A correlation coefficient close to 1 indicates a strong p ositive linear relationship, 
+meaning that as one variable increases, the other variable also tends to increase.  
+ 
+A correlation coefficient close to -1 indicates a strong negative linear relationship, 
+meaning that as one variable increases, the other variab le tends to decrease.  
+ 
+A correlation coefficient close to 0 indicates no linear relationship between the 
+variables.  
+ 
+ 
+ 
+ 
+ 
+Figure3.13corelation heatmap  
+ 
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 16  
+ Here is the correlation heatmap  for the numerical features:  
+ size  has the strongest positive correlation  with price  (~0.72), making it the 
+most influential feature.  
+ baths  also shows a moderate correlation  with price  (~0.52).  
+ beds  has a weaker correlation with price  (~0.47), but it still adds value in context 
+with other features.  
+  
+ Feature  Importance : 
+● Feature  importance refers to the measure of the contribution of each feature in 
+a predictive model towards predicting the target variable accurately. It helps in 
+understanding which features have the most influence on the  output  of the 
+model  and can provide valua ble insights into the underlying relationships 
+within the dataset . 
+ 
+ 
+          
+ 
+Figure 3.14 feature importance score  
+ 
+● The horizontal bar plot visually  represents  the importance  of each feature  
+.Features  are displayed on the y -axis, while their importance scores are 
+depicted on the x -axis. Higher  importance  values  indicate  that afeature  is more  
+influential  in making  predictions, while lower values indicate less importance . 
+ 
+ 
+  
+  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 17  
+ 
+ MACHINE  LEARNING:  
+ Introduction  to Machine  Learning:  
+ 
+● Machine learning is a branch of artificial intelligence that develops algorithms by 
+learning the hidden patterns of the datasets used to make predictions on new similar 
+type data, without being explicitly programmed for each task.  
+● Machine Learning uses a data -driven approach, It is  typically  trained  on 
+historical data and then used to make predictions on new data.  
+  
+  
+ Types  of Machine  Learning:  
+ 
+ 
+ 
+4Figure3.15  Types  of Machine  Learnings  
+1. Supervised Learning:  
+● Supervised learning is a type of machine learning where the model is trained on 
+a labelled dataset, which means the dataset contains input -output pairs.  
+● The goal is for the model to learn the mapping from inputs to outputs so that it 
+can make predictions or decisions  when given new unseen data.  
+● In supervised learning, the algorithm tries to find the relationship between the 
+input variables (features) and the target variable (output) by minimising the error 
+between the predicted output and the actual output.  
+● Common alg orithms used in supervised learning include linear regression, 
+decision trees, support vector machines, and neural networks.  
+2. Unsupervised Learning:  
+● Unsupervised learning is a type of machine learning where the model is trained 
+on unlabeled data.  
+● The goal i s to find hidden patterns or structures in the data without any explicit 
+guidance.  
+● In unsupervised learning, the algorithm tries to group similar data points together 
+or discover the underlying structure of the data  
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 18  
+ ● Common tasks in unsupervised learning in clude clustering, dimensionality  
+reduction. Some popular algorithms in unsupervised learning include k -means 
+clustering, hierarchical clustering, principal component analysis (PCA)  
+3. Semi -Supervised Learning:  
+● Semi -supervised learning is a hybrid approach tha t combines elements of both 
+supervised and unsupervised learning.  
+● In semi -supervised learning, the model is trained on a dataset that contains both 
+labelled and unlabeled data. The labelled data  provides  some  super  vision  to 
+guide  the learning process, whi le the  unlabeled  data helps  to improve  the model's  
+generalisation and performance.  
+ 
+● Semi -supervised learning is useful when labelled data is expensive or difficult to 
+obtain, as it allows leveraging large amounts of unlabeled data along with a 
+smaller amount of labelled data.  
+● Some techniques used in semi -supervised learning include self -training, co -
+training, and multi -view learning.  
+4. Reinforcement  Learning:  
+● Reinforcement learning is a type of machine learning where an agent learns to 
+make decisions by interacting with an environment.  
+● The agent learns to take actions that maximise some notion of cumulative 
+reward. Unlike supervised learning, where the model is trained on labelled 
+examples, and unsupervised learning, where the model discovers patterns in 
+unlabeled data, reinforcement learning learns from feedback provided by the  
+environment.  The agent receives  feed back in the form  of rewards  or penalties  
+based  on the actions  it takes,and it learns to adjust its actions accordingly to 
+maximise the total re ward over time.  
+ 
+● Reinforcement learning is commonly used in applications such as game playing, 
+robotics, and autonomous vehicle control. Algorithms in reinforcement learning 
+include Q -learning, Deep Q -Networks (DQN), policy gradients, and actor -critic 
+meth ods. 
+ 
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 19  
+ 
+  
+Supervised  Learning:  
+ 
+● Supervised learning is a type of machine learning where the model is trained on 
+a labelled dataset, which means the dataset contains input -output pairs.  
+● In supervised learning, the algorithm tries to find the relationship between the 
+input variables (features) and the target variable (output) by minimising the error 
+between the predicted output and the actual output.  
+ 
+ 
+Figure3.16 The Roadmap  of Supervised  Learning  :Process  Overview  
+ 
+ 
+● There are two types in Supe rvised Machine Learning:  
+1. Regression:  
+● Regression  is a type of supervised learning where the goal is to predict a 
+continuous target variable.  
+● The aim is to learn a function that maps input features to a continuous output  
+ 
+● Examples Predicting house prices, stock prices, temperature, sales revenue, 
+andso on. 
+ 
+ 
+Figure3.27 Regression Analysis Visualised :Understanding Relationship  
+ 
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 20  
+ 
+2. Classification:  
+● Classification  is another  type of supervised  learning  where  the goal is to predict  
+the category or class label of a data instance.  
+● In classification,  the output  variable  is categorical  and belong  stoa finite  set of 
+classes or categories.  
+● The aim is to learn a decision boundary that separates different classes in the 
+feature space.  
+● Common  examples  of classification  tasks  include  email  spam  detection, 
+sentiment analysis, disease diagnosis, and image classification.  
+ 
+ 
+ 
+Figure3.18 Classification  Analysis  :A Visual  Overview  
+ Why  Regression?  
+Exploring  Trends  and Correlations  in Pair Plot Scatterplots:  Implications  for 
+Regression Modeling . 
+ 
+ 
+Figure3.19Scatter  Plot Analysis  :Informing  Regression  Selection  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 21  
+ 
+ 
+ 
+● Thus, given the presence of such relationships in the data visualised through 
+scatterplots, regression emerges as a preferred modelling approach.  
+ 
+ Regression:  
+● Regression method is used to understand the relationship between different 
+independent variable  sand a dependent variable or outcome.  
+● By estimating this relationship, the model  can predict  the out come  of new and 
+unseen data. 
+● Regression generally involves plotting a line of best fit through the data points.  
+● GOAL : Predict the value of the dependent variable based on the values of 
+independent variables  
+● Types  Of Regression:  
+ 
+ 
+ 
+ 
+ 
+Figure3.20 Regression  Model  Selection  Overview  
+  
+  
+  
+  
+  
+  
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 22  
+  Linear  Regression:  
+● Purpose : The primary purpose of linear regression is to  understand  and 
+quantify  the relationship between variables  .Linear regres sion is ideal for linear 
+data sales prediction due to its ability to analyse historical sales data, ident ify 
+key factors influencing sales (such as promotional  activities,  seasonality  ,and 
+competitor  actions), and generate accurate forecasts. By establishing this 
+relationship, we can make predictions, identify patterns, and gain insights into 
+the underlying d ynamics of the data. 
+1. Introduction:  
+● Linear  regression  is a statistical  method  used to model  the relationship  between  
+two or more variables by fitting a linear equation to observed data.  
+● Linear  regression  assumes  that there  is a linear  relationship  between  the 
+dependent variable (the variable we want to predict or explain)  
+And one or more  independent  variables(the  variables  used to predictor explain 
+the dependent variable).  
+● Equation: Y = β₀ + β₁X + ɛ 
+Where  Y is the dependent  variable, X is independent variables,  
+β₀ is the y -intercept, representing the value of  Y when   X is zero.  
+β₁ is the slope  coefficient,  indicating  the change  in Y for a one -unit change in  
+X. 
+ɛ represents the error term, which captures the difference  between         
+observed and predicted values.  
+2. Implementation Step:  
+1. Initialise a Linear Regression model (LinearRegression ). 
+2. Train  the model  on the  training  data( X_train , y_train ) using  the fit method.  
+3. Predict  the target  variable( y_pred_linear_reg )for the test data( X_test ) using  the 
+predict  
+method.  
+3. Evaluation  Metrics:  
+1. Mean  Squared  Error : Calculate  the average  squared  difference  between  the 
+actual and predicted values.  
+MSE : [149582021 ] 
+2. Root  Mean  Squared  Error  : Compute  the square  root of MSE  to obtain the 
+average error in the same units as the target variable.  
+RMSE : [ 382237  ] 
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 23  
+ 3. R-squared  score:  Measure  the proportion  of the variance  in the dependent  
+variable that is explained by the independent variables.  
+R2 Score : [ 0.53] 
+ 
+ 
+4. Actual  Value  vs Predictio n Value:  
+ 
+ 
+Figure3.2 1ScatterPlot  Analysis:  Actual  vs. Predicted  Values  for Linear  Regression  
+Based on the  analysis  of the scatter  plot notice  able divergence  betw een the actual 
+data points and the predicted values. This indicates that the linear regression model 
+does not adequately capture the underlying distribution of the data.Alternative 
+modelling techniques that can better capture the complexity of the data, such as 
+polynomial regression, decisi on trees etc, should be considered for improved 
+predictive performance.  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 24  
+  Support  Vector  Regression : 
+● Purpose : SVR serves as  a power  ful tool when  conventional  linear  regression  
+model  s struggle to capture complex data patterns with non -linear relationships. 
+By utilising advanced techniques from SVM, SVR offers improved decision -
+making and performance in predictive analytics applications.  
+1. Introduction:  
+● Support Vector Regression (SVR) is a regression algorithm derived 
+fromtheSupport Vector Machin e (SVM) framework, tailored specifically for 
+continuous output prediction tasks.  
+● The SVR  finds a function that approximates the relationship between the 
+input variables and a continuous target variable, while minimising the 
+prediction error.  
+● Kernel  Trick  :SVR  employ  sakernel  function  to map the input  data into a 
+higher -dimensional space where linear separation becomes feasible  
+● Margin of Tolerance: SVR introduces an epsilon -insensitive zone. Within this 
+zone, deviations  from  the predicted  out put are tolera ted, allowing  for a flexible  
+model  that is less sensitive to noise or outliers in the data.  
+● Support Vectors: Support vectors are crucial data points that lie on the margin 
+of tolerance shaping the regression line to accurately predict the target variable.  
+2. Implementation Step: 
+1. AnSVRmodel( SVR)iscreatedwithalinearkernel,asspecifiedbythe parameter  
+kernel='linear' . 
+2. The SVR model is trained on the training data, where it learns to find the 
+optimal hyperplane that best fits the data while maximising the margin  
+ 
+3. Evaluation Metrics:  
+1. Mean Squared Error : Calculate the average squared difference between the 
+actualand predicted values.  
+MSE : [ 370770965606.673  ] 
+2. Root Mean Squared Error : Compute the square root of MSE to obtain the 
+average error in the same units as th e target variable.  
+RMSE : [ 608909  ] 
+3. R-squared score: Measure the proportion of the variance in the dependent 
+variablethat is explained by the independent variables.  
+R2Score : [ -0.069 ] 
+ 
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 25  
+ 4. Actual  Value  vs Prediction  Value:  
+  
+ 
+Figure3.21 ScatterPlot Analysis: Actual vs. Predicted Values for SVR  
+Based on the scatter plot analysis comparing the actual values against the 
+predicted values using Support Vector Regression leading to poor predictive 
+performance. Without a clear pattern  in the scatterplot,it  becomes  challenging  
+to trust the accuracy of the SVR predictions.  Alternative modelling approaches 
+that can better capture the complexity of the data, such as Decision Tree 
+Regression, Random Forest Regression  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 26  
+  Decision  Tree  Regression : 
+● Purpose : Decision Tree Regression is a preferred choice for house  sales 
+prediction because it captures nonlinear patterns effectively and handles 
+interactions between features without requiring complex preprocessing or 
+tuning of hyper paramete rs and is a valuable tool for data -driven decis ion-
+making in the real -estate  industry.  
+ 
+1. Introduction:  
+● Decision Tree Regression observes features of an object and trains a model in 
+the structure of a tree to predict data in the future to produce meaningful 
+continuous output.  
+● Decision Tree Regression is capable of capturing non -linear relationships and 
+interactions between features . 
+● Tree Structure: Decision tree regression partitions the feature space into tree -
+like structure. Each internal node represents a decision, while each leaf node 
+represents a prediction.  
+ 
+● Splitting Criteria: At each node of the tree,  the algorithm selects the feature  and 
+split point that minimise the variance of the target variable within the resulting 
+subgroups.  
+● Prediction: To make predictions , the algorithm traverses the tree from the root  
+to a leaf. The prediction is then obtained  by averaging the target values in the 
+corresponding subgroup represented by the leaf node.  
+2. Implementation Step:  
+1. Initialise  a Decision  Tree Regression  model (DecisionTreeRegressor ). 
+2. Train  the model  on the  training  data( X_train , y_train )using  the fit method.  
+3. Predict  the target  variable( y_pred_decision_tree )for the test data( X_test )using  the 
+predict  
+method.  
+3. Evaluation Metrics:  
+1. Mean Squared Error : Calculate the average squared difference between the 
+actual  and predicted values.  
+MSE : [ 3054511375321  ] 
+2. Root Mean  Squared Error : Compute the square root of MSE to obtain the 
+average error in the same units as the target variable.  
+RMSE : [ 1747716 ] 
+3. R-squared score: Measure the proportion of the variance in the dependent 
+variablethat is explained by the independent variables.  
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 27  
+ R2 Score : [ -7.8] 
+4. Actual  Value  vs Prediction  Value:  
+ 
+                         
+ 
+Figure3.23decision tree regresion : Scatter Plot of Actual vs .Predicted Values  
+The scatter plot analysis suggests that Decision Tree Regression may not be 
+suitable as the final model due to discontinuous,  jagged predictions and 
+inability to capture the underlying relationship between the predictors and the 
+target variable.  Alternative modelling approaches that address these limitations, 
+such as ensemble methods like random forests or gradient boosting, may be 
+more appropriate  
+  
+  
+  
+  
+  
+ 
+  
+  
+  
+  
+  
+  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 28  
+  Random  Forest  Regression : 
+● Purpose : Random Forest Regression is to improve predictive accuracy and 
+robustness compared to individual decision trees. By combining the predictions 
+of multiple trees trained on different subsets of the data, random  forest  
+regression  of fersa more stable and reliable model, particularly for complex 
+prediction tasks involving non -linear relationships and interactions between 
+variables and offers improved r obustness to outliers and noise compared to 
+single decision tree models.  
+ 
+1. Introduction:  
+● Random Forest Regression works by constructing multiple decision trees 
+during the training phase. Each decision tree is built using a subset  of the 
+features  and a rando m subset of the training data.  
+● The output of each individual decision tree is averaged to obtain the final  
+prediction. This averaging process reduces overfitting and provides more stable 
+and accurate predictions.  
+● Ensemble of Decision Trees: Random Forest Regression constructs a collection 
+of decision trees by introducing randomness in the training process, each tree 
+learns different aspects of the data.  
+● Voting Mechanism: Predictions from individual trees are combined through a 
+voting mechanism  and the fina l prediction is the average of predictions from all 
+trees.  
+● Bagging and Randomization: Bagging involves training each tree on a 
+bootstrap sample of the data, while random feature selection ensures that each 
+tree considers only a subset of features at each s plit. These techniques reduce 
+overfitting andenhance the stability and accuracy of the model.  
+2. Implementation Step:  
+1. Initialize  Random   Forest   Regressor  as reg_rf  with specified hyper parameter s 
+(max_depth=2 and 
+random_state=0 ). 
+2. Train  the model  on the training  data( X_train ,y_train )using  the fit method.  
+3. Predict  the target  variable( rf_pred )for the test data( X_test )using  the trained  
+model's  
+Predict  method.  
+ 
+ 
+3. Evaluation Metrics:  
+1. Mean Squared Error : Calculate the average squared difference between the 
+actual  and predicted values.  
+MSE : [2865321245  ] 
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 29  
+ 2. Root Mean Squared Error : Compute the square root of MSE to obtain the 
+average error in the same units as the target variable.  
+RMSE : [ 53021 ] 
+3. R-squared score: Measure the proportion of the variance in the dependent 
+variablethat is explained by the independent variables.  
+R2 Score : [ 0.175 ] 
+4. Actual  Value  vs Prediction  Value:  
+ 
+                                                 
+ 
+Figure3.24 Actual vs Predicted Values: Random forest regression Scatter Plot 
+ 
+ 
+Based on  the scatter plot analysis comparing the actual values against the predicted values 
+using Random Forest Regression does not show any discernible pattern or relationship 
+between the actual and predicted values, it indicates that the random forest model fail s to 
+capture the underlying structure of the data.Without a clear relationship in the scatter plot, 
+it becomes challenging to trust the reliability and accuracy of the random forest 
+predictions.  
+ 
+ 
+ 
+  
+ 
+ 
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 30  
+ Extreme  Gradient  Boosting  Regression : 
+● Purpose : XGBoost  Regression has the ability to combine multiple weak 
+learners, typically decision trees, sequentially It aims to achieve superior 
+predictive accuracy compared to conventional regression  techniques. 
+Additionally, XGBoost Regression implements advanced optim ization 
+techniques like gradient descent, resulting in robust performance and efficient 
+handling of  complex  data sets and capturing  in tricate patterns and 
+relationships in the data more effectively.  
+ 
+1. Introduction:  
+● Extreme Gradient Boosting Regression, represents a cutting -edge machine 
+learning algorithm designed to enhance  the predictive  power  of decision  trees  
+through  gradient boosting.  
+● XGBoost  Regression  leverages  ensemble  learning  by sequentially  integrating  
+multiple weak learners, typically decision  trees, into a unified model.This  
+ensemble  approach improves predictive accuracy and stability.  
+● Boosting Technique: XGBoost Regression employs a boosting technique, 
+where decision trees are added sequentially to  the model,each  correcting  the 
+errors  made  by its predecessors  
+● Gradient Descent Optimization: This optimization technique adjusts the 
+model's parameters in the direction of the steepest descent of the loss function.  
+● Regularisation and Tree Pruning: Regularisation penalises overly complex 
+models, whil e tree pruning removes unnecessary branches, resulting in a more 
+balanced and interpretable model.  
+2. Implementation Step:  
+1. Initialization of the XG  Boost Regression model ( XGB  Regressor ) with specified 
+hyper  parameters such as the number of estimators, early stopping rounds, and  
+learning rate . 
+2. Training  of the model  on the training  data( X_train, y_train ). 
+3. Prediction  of the  target variable( y_pred ) on the test  data (X_test ). 
+3. Evaluation Metrics:  
+1. Mean Squared Error : Calculate the average squared difference between the 
+actual  and predicted values.MSE : [153262035  ] 
+2. Root Mean Squared Error : Compute the square root of MSE to obtain the 
+average error in the same units as the target variable.  
+RMSE : [ 45002  ] 
+3. R-squared score: Measure the proportion of the variance in the dependent 
+variablethat is explained by the independent variables.  
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 31  
+ R2 Score : [ 0.32] 
+4. Actual  Value  vs Prediction  Value:  
+ 
+                        
+ 
+ 
+             Fig3.25 Xgboost  Regression  Performance:  Actual  vs. Predicted  Values  
+ 
+ 
+ 
+The scatter plot analysis suggests that xgboost   may not be suitable as the final 
+model due to lack of generalisation to new data. That indicates the model's 
+performance may not accurately predict the target variable for new observations and 
+resulting in poor predictive performance on unseen data.  Alter native modelling 
+approaches that strike a better balance between model complexity and 
+generalisation, such as ensemble methods, may be more appropriate for this dataset  
+             
+  
+  
+  
+  
+  
+
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 32  
+  Polynomial   Regression:  
+● Purpose : Polynomial regression captures complex non -linear relationships 
+inherent in sales data, such as seasonal fluctuations or saturation effects of 
+marketing campaigns.  In many real -world scenarios for house sales prediction, 
+the linear model may not accurately represent the underlying relat ionship 
+between predictors and outcomes. Polynomial regression provides a more 
+flexible approach to modelling such relationships, allowing for better fitting 
+and more accurate predictions.  
+1. Introduction:  
+● Polynomial Regression is a form of linear regression in which the relationship 
+between the independent variable x and dependent variable y is modeled as an 
+nth-degree polynomial.  
+● Relationship between the variables is better represented by a curve rather 
+than a straight line, polynomial regression can capture the non -linear 
+patterns in the data.  
+● Polynomial regression can be valuable during exploratory data analysis to 
+uncover hidden  patterns and trends in the data.  
+● Equation: Y = β₀ + β₁X + β₂X² + β₃X³ + ... +ɛ, 
+Where Y is the dependent variable,  
+X is an independent variable and the addition of   higher -order 
+polynomial terms (such as X², X³, etc.)  
+β₀, β₁, β₂ ,   are coefficients representing the strength and
+ dire
+ction of the relation between variables ,ɛ represents the error 
+term ,which captures the difference between observed and 
+predicted values.  
+2. Implementation Step:  
+1. Instantiate Polynomial Features with degree 2 to create polyno mial features.  
+2. Transform training and testing features( X_train , X_test ) into polynomial features 
+(X_poly_train , X_poly_test ). 
+3. Instantiate ‘ Linear Regression ’ model.  
+4. Train the model on polynomial features( X_poly_train ,y_train )using fit. 
+5. Make predictions ( y_pred_poly_reg ) on the test set (X_poly_test) . 
+3. Evaluation Metrics:  
+1. Mean Squared Error : Calculate the average squared difference between the 
+actual and predicted values.  
+MSE : [137568213  ] 
+776388  
+ PROGRESS WORK  
+GTU  
+ SVBIT  
+ 33  
+ 2. Root Mean Squared Error: Compute the square root of MSE to obtain t he 
+average error in the same units as the target variable.  
+RMSE : [ 36913 ] 
+3. R-squared score :Measure the proportion of the variance in the dependent 
+variable that is explained by the independent variables.  
+R2 Score : [ 0.60]  
+ 
+4. Actual Value vs Prediction Value:  
+ 
+                            
+ 
+ 
+Figure 3.26 Actual vs. Predicted Values :polynomial regressio n
+
+ 776388  
+ 
+ PROJECT  WORK  
+GTU  
+ SVBIT  
+ 34  
+ Model selection workflow  
+ 
+Figure3.27 Actual vs  Predicted Scatter Plot : model selection work flow  
+This diagram presents a detailed and iterative machine learning workflow perfectly suited 
+for a housing price prediction project. Here's how each step relates to your project:  
+Step 1: Data Selection  
+In this stage, various sources of real estate data are gathered —such as housing listings, 
+location coordinates, neighborhood statistics, crime rates, and property tax records. These 
+raw datasets form the foundation of your predictive pipeline.  
+Step 2: Pre -Processing  
+The raw data is cleaned and transformed into structured format. This includes remov ing 
+missing values, encoding categorical features (like neighborhood or property type), 
+normalizing numerical data (like area or price), and merging data from multiple sources 
+into a unified format for model consumption.  
+Step 3: Model Training and Candidat e Selection  
+With structured data ready, various machine learning algorithms (e.g., Linear Regression, 
+Random Forest, Gradient Boosting) are trained. Each model becomes a “candidate 
+model,” whose performance is evaluated. The process repeats —adjusting param eters or 
+selecting new algorithms —until the best performing model is found.  
+
+ 776388  
+ 
+ PROJECT  WORK  
+GTU  
+ SVBIT  
+ 35  
+  
+Step 4: Model Tuning  
+Hyperparameter tuning and cross -validation are performed to refine the model. 
+Techniques like grid search or random search are applied to improve accuracy and  
+generalization. In the context of house price prediction, this might include tuning depth of 
+trees, learning rates, or regularization parameters.  
+Step 5: Prediction and Deployment  
+Once the model performs well, it is used to make predictions on unseen hous ing data. The 
+model is deployed into an application, dashboard, or API that can be accessed by end -
+users, such as real estate analysts or buyers, to predict prices in real -time.  
+Step 6: Monitoring and Maintenance  
+The deployed “golden model” is continuously  monitored for drift in performance. As 
+housing markets evolve, new data must be incorporated to retrain or fine -tune the model, 
+ensuring long -term reliability and accuracy.  
+This workflow not only ensures high model accuracy but also provides a scalable an d 
+maintainable system for real -world housing price prediction applications.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 776388  
+ 
+ PROJECT  WORK  
+GTU  
+ SVBIT  
+ 36  
+  
+Summary  
+1. 🏠 Introduction to Real Estate Market Trends  
+Real estate markets globally have experienced significant transformation over the 
+past few decades. From manual valuation methods to data -driven estimation 
+systems, the paradigm has shifted due to increasing data availability and 
+computational advancements. Real estate prices are influenced by a myriad of 
+factors including macroeconomic trends, interest rates , government policies, and 
+socio -demographic patterns.  
+Urbanization has driven up demand in major cities, while suburban expansion has 
+opened up new opportunities for affordable housing. Understanding historical 
+trends in house prices —such as the housing b ubble of 2008 or the post -pandemic 
+price surges —offers a contextual backdrop to the need for predictive models. 
+Modern buyers and sellers rely on accurate estimations, making data science an 
+essential tool in real estate analysis.  
+— 
+2. 🏠 The Role of Machine Learning in Real Estate  
+Machine learning (ML) has revolutionized predictive analytics in real estate. 
+Traditional statistical methods, though informative, often fall short in capturing 
+nonlinear relationships and interactions between features. ML models s uch as 
+Random Forest, Gradient Boosting Machines, and Neural Networks allow for more 
+flexible learning, enabling high -accuracy predictions.  
+For example, instead of relying solely on square footage or location, ML can 
+incorporate a blend of features like pr oximity to schools, market sentiment, 
+environmental quality, and historical price movements. This holistic approach 
+enhances decision -making for stakeholders ranging from realtors to investors and 
+policy planners. Furthermore, ML algorithms can be retraine d over time, making 
+them adaptive to evolving market conditions.  
+— 
+3. 🏠 Ethical Considerations and Bias in Predictive Modeling  
+ As predictive models gain traction in real estate, ethical concerns become 
+increasingly important. Models may unintentionally rei nforce societal biases. For 
+instance, if historical data reflects discrimination in lending or redlining practices, 
+the model may inherit these biases and suggest lower property values for 
+historically marginalized neighborhoods.  
+Transparency is key in model design. It is essential to ensure that features 
+contributing to the prediction do not reflect protected attributes (e.g., race, religion). 
+Regular fairness audits and explainable AI (XAI) tools like SHAP or LIME can 
+ 776388  
+ 
+ PROJECT  WORK  
+GTU  
+ SVBIT  
+ 37  
+ provide ins ight into model behavior. Moreover, ethical data sourcing, 
+anonymization, and informed consent in data collection practices must be upheld.  
+ 
+4. 🏠 Limitations o f the Current Model  
+While the model provides reliable predictions, it is not without limitations. The 
+accuracy of predictions is directly influenced by the quality and granularity of data. 
+If the dataset lacks recent updates, regional diversity, or key influencing variables 
+(e.g., renovation quality), the model may produce skewed results.  
+Additionally,  the model may not generalize well to entirely new or unseen 
+geographies unless it is retrained or expanded with more diverse datasets. 
+Interpretability may also suffer in more complex models, especially ensemble 
+methods or deep learning techniques, where understanding internal logic becomes 
+challenging. These constraints must be communicated when deploying the model in 
+real-world applications.  
+ 
+5. 🏠 Future Work and Model Enhancement Strategies  
+To further improve the model, several enhancements can be consid ered:  
+ Feature Engineering: Introduce new features such as local crime rates, school 
+ratings, walkability scores, and real -time sentiment data from social media.  
+ Spatial Modeling: Integrate geospatial data through GIS or spatial autocorrelation 
+techniques t o capture neighborhood effects.  
+ Time -Series Forecasting: Apply time -aware models to forecast price trends rather 
+than single -point estimates.  
+ Ensemble Techniques: Combine multiple models using techniques like stacking or 
+blending for improved accuracy.  
+ Model Explainability: Integrate explainable AI tools to better understand and 
+visualize the impact of different features on the prediction.  
+Additionally, integrating user feedback loops (e.g., realtor validation of predictions) 
+could help in iterative impr ovements of the model.  
+ 
+6. 🏠 Comparative Study with Alternative Algorithms  
+Different algorithms offer varied strengths depending on data characteristics. A 
+comparative evaluation of models like:  
+ Linear Regression (baseline; interpretable but limited)  
+ Decisi on Trees (easy to visualize but prone to overfitting)  
+ Random Forest (robust and accurate but less interpretable)  
+ XGBoost (high -performance, especially on structured data)  
+ 776388  
+ 
+ PROJECT  WORK  
+GTU  
+ SVBIT  
+ 38  
+  Neural Networks (powerful but requires large datasets and computational resources)  
+Such comparative studies, even theoretically, help justify the chosen model. Performance 
+can be assessed not only on accuracy but also on model complexity, training time, 
+generalization ability, and ease of deployment.  
+Each algorithm has trade -offs, and the ideal choice depends on the specific use -case, 
+available data, and desired level of transparency.  
+📈 Behavioral Economics in Housing Price Predictions  
+Behavioral economics merges insights from psychology with traditional economic theory, 
+offering a nuanced  understanding of decision -making. In real estate, price is not 
+determined solely by physical attributes or location. Instead, buyer psychology plays a 
+significant role in perceived value.  
+One central concept is “anchoring.” Buyers often fixate on the initial listing price, using it 
+as a reference even if it is strategically inflated. This psychological anchor affects 
+negotiation outcomes and final sale prices. A predictive model relying only on historical 
+sale prices might miss these subjective influen ces, underscoring a limitation in data -
+driven modeling.  
+Another factor is “loss aversion.” Sellers may resist lowering prices below what they 
+paid, even when the market suggests otherwise. As a result, homes may sit unsold longer, 
+distorting market average s and affecting model training data.  
+Framing effects also influence buyer behavior. A property described as “cozy and 
+vintage” may sell for more than one labeled “small and old,” even if the attributes are 
+objectively identical. This reveals a gap between the tangible features captured by ML 
+and the emotional response of buyers.  
+Incorporating behavioral variables, such as listing description sentiment or real -time 
+buyer feedback, could enhance model realism. Future models may need to learn not just 
+from his torical numbers but also from behavioral signals, introducing an interdisciplinary 
+challenge.  
+2. 📈 Socioeconomic & Urban Planning Factors  
+Housing prices are intricately linked with broader socioeconomic dynamics and long -term 
+urban planning policies. Gove rnments and municipalities influence land use, 
+infrastructure development, and zoning, all of which alter real estate value over time.  
+Zoning laws, for instance, determine how land may be used —residential, commercial, 
+mixed -use, or green space. Properties near upcoming commercial zones often appreciate 
+in value faster due to anticipated increases in accessibility and employment opportunities. 
+However, predictive models may fail to account for zoning changes if datasets are 
+outdated.  
+Another important factor  is infrastructural development. Projects like new highways, 
+metro lines, or even bike paths can significantly increase property desirability. These 
+ 776388  
+ 
+ PROJECT  WORK  
+GTU  
+ SVBIT  
+ 39  
+ investments improve accessibility and reduce commuting times, which are strong 
+predictors of price apprecia tion. Including planned infrastructure projects in predictive 
+models, though difficult, could enhance their foresight.  
+Socioeconomic indicators such as literacy rates, employment trends, average income 
+levels, and crime statistics also shape demand. Urban planners may prioritize 
+redevelopment projects in economically disadvantaged areas, spurring gentrification —a 
+process where lower -income residents are displaced as housing becomes more expensive.  
+A forward -looking model would ideally integrate economic pla nning data, regional 
+development strategies, and census updates. Predictive accuracy, in this case, moves 
+beyond property features and embraces broader contextual awareness.  
+3. 📈 Real-Time Pricing vs Historical Modeling  
+Most predictive models are retrospe ctive —they analyze historical data to forecast future 
+values. However, in highly dynamic markets, real -time factors such as live demand, 
+traffic patterns, and ongoing bidding behavior can influence house prices more than past 
+averages.  
+Real-time modeling i ntroduces the concept of “live variables,” which could include:  
+Current interest rates from central banks.  
+Recent price adjustments on neighboring listings.  
+Foot traffic data around the property (collected via mobile GPS).  
+Traffic congestion and daily comm ute times from map APIs.  
+While integrating real -time data presents technical and privacy challenges, it offers 
+significant value. For instance, if a property is suddenly relisted at a lower price or if 
+many users are viewing it online, this demand signal c ould be used to dynamically adjust 
+its predicted value.  
+Moreover, predictive models could shift from one -time forecasting to continuous 
+valuation. A live model might update its estimate every week as new listings, economic 
+indicators, and buyer behavior ch ange. This evolution leads to predictive systems that are 
+proactive, not just reactive.  
+The shift from historical to real -time models requires new infrastructure: data streaming, 
+cloud computation, and continuous retraining. While challenging, this advance ment 
+would transform predictive modeling from an offline process to an online service.  
+4. 📈 Post-Prediction Value Engineering: Recommendation Systems  
+Predicting a house price is valuable, but offering actionable advice post -prediction can 
+further empower  users. One such approach is “value engineering” through 
+recommendation systems that suggest targeted improvements to enhance a property’s 
+market value.  
+ 776388  
+ 
+ PROJECT  WORK  
+GTU  
+ SVBIT  
+ 40  
+ For example, suppose a model predicts a property’s current value at ₹85 lakh. A 
+recommendation engine c ould analyze comparable properties and suggest upgrades —
+such as kitchen renovation or solar panel installation —that may increase the home’s 
+resale value by 10 –15%.  
+This concept turns a passive estimate into a prescriptive strategy. It bridges data science 
+and real estate consulting. Homeowners, investors, and realtors can use such systems to 
+make data -backed decisions about renovations, staging, or timing of sale.  
+Key components of such systems include:  
+ROI estimation for different types of upgrades.  
+Cost v s value analysis using regional contractor data.  
+Peer property comparison to identify gaps.  
+From a machine learning standpoint, this system would require a separate model trained 
+on before -and-after pricing of renovated homes. It must also factor in regional tastes —
+what adds value in Mumbai may not apply in Jaipur.  
+This value -engineering layer transforms your ML model into a holistic decision -support 
+platform, improving its commercial and practical appeal.  
+ 
+5. 📈 Modeling Gentrification and Urban Dis placement  
+Gentrification is a socio -economic process where urban neighborhoods experience 
+transformation due to an influx of wealthier residents, often resulting in rising property 
+values and displacement of existing communities. Predictive modeling can pl ay a crucial 
+role in understanding and forecasting this complex urban phenomenon.  
+Traditional models might predict that an area with historically low prices will continue to 
+perform poorly. However, early signs of gentrification —such as rising rental deman d, 
+new business openings (cafés, coworking spaces), or increased building permits —may 
+indicate upcoming price appreciation. Failure to capture these signals can lead to 
+underestimation of future values.  
+A theoretical approach to modeling gentrification wou ld include:  
+Monitoring demographic shifts (e.g., median age, income).  
+Tracking commercial development permits and business turnover.  
+Assessing changes in public sentiment using social media or news coverage.  
+Studying shifts in political attention and inves tment.  
+ 776388  
+ 
+ PROJECT  WORK  
+GTU  
+ SVBIT  
+ 41  
+ By creating an index of “gentrification risk” or “urban transition potential,” a model could 
+forecast not just prices, but social dynamics. Such forecasts could inform urban planners, 
+non-profits, and government bodies aiming to preserve affordabili ty or provide relocation 
+assistance.  
+On the flip side, this raises ethical dilemmas. Predictive models could be used to 
+preemptively buy up property in areas forecasted to gentrify, contributing to the 
+displacement the model detects. This highlights the re sponsibility in designing socially 
+conscious algorithm  
+Next Steps  
+Let me know if you'd like me to continue with detailed theory for the remaining five 
+advanced topics:  
+📈 Cognitive Biases in Human Valuation vs AI Models  
+📈 The Explainability Paradox in Hig h-Stakes ML  
+📈 Causal Inference vs Correlation in Housing Data  
+📈 GeoAI: The Future of AI + Geospatial Intelligence  
+📈 Global vs Local Models: A Scalability Dilemma  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 776388  
+ 
+ PROJECT  WORK  
+GTU  
+ SVBIT  
+ 42  
+ PROJECT  LIMITATIONS  
+1. Data Avail ability : The accuracy and effectiveness of the prediction model 
+heavily rely on the availability and quality of historical sales data. Limitations 
+may arise if there are gap so rin consistencies in the dataset ,which could 
+impact the model' sability to make accura te predictions.  
+2. Scope of Drug Categories: The prediction model's accuracy may vary 
+depending on the diversity and granularity of drug categories included in the 
+dataset .If certain drug categories are underrepresented or absent, the model's 
+performance for  those categories may be compromised.  
+3. Seasonal Variations : house sales often exhibit seasonal patterns influenced by 
+factors like weather, holidays, or disease out breaks.While the model may 
+account for seasonality to some extent, predicting sales accurate ly during 
+periods of unusual or unpredictable variations can be challenging.  
+4. Market Dynamics: The real -estate market is dynamic, with new drugsentering 
+the market, patents expiring, and changes in treatment guidelines. These 
+market dynamics can impact sale s trends and require continuous monitoring 
+and adjustment of the prediction model to remain relevant.  
+5. Dependency on User Input Quality: The accuracy of predictions is 
+contingent on  the quality and accuracy of user -provided inputs such as start 
+date ,end da te ,and drug category. Incorrect or ambiguous inputs may lead to 
+erroneous predictions.  
+6. Data Privacy and Compliance: House sales data often contain sensitive 
+information about patients, healthcare providers, and proprietary business 
+practices. Ensuring com pliance with data privacy regulations (e.g., GDPR, 
+HIPAA) and protecting confidential information may impose constraints on 
+data collection, sharing, and analysis.  
+7. Regulatory Compliance : The prediction model must adhere to regulatory 
+guide lines and compli ance standards applicable to house sales forecasting. 
+Failure to comply with regulations may result in legal or ethical consequences.  
+8. Uncertain Future  Events: Predicting house sales involves  fore casting  future  
+events and trends, which inherently carry uncertainty. Unforeseen events such 
+as regulatory changes, breakthroughs in medical research, or unexpected 
+market disruptions can challenge the accuracy of predictions and requir e 
+ongoing adaptation of the model.
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 43  
+  
+5.Appendices  
+ 
+ 
+Index.html file  
+ 
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF -8"> 
+    <meta name="viewport" content="width=device -width, initial -scale=1.0">  
+    <title>House Price Prediction</title>  
+    <!-- Add your CSS styles or include external stylesheets here --> 
+    <style>  
+        /* Add your styles here */  
+        body {  
+            font-family: Arial, sans -serif;  
+            margin: 0;  
+            padding: 0;  
+            background -color: #f4f4f4;  
+        } 
+ 
+        header {  
+            background -color: #333;  
+            color: #fff;  
+            padding: 10px;  
+            text-align: center;  
+        } 
+ 
+        main {  
+            max-width: 800px;  
+            margin: 20px auto;  
+            padding: 20px;  
+            background -color: #fff;  
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  
+        } 
+ 
+        footer {  
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 44  
+             text-align: center;  
+            padding: 10px;  
+            background -color: #333;  
+            color: #fff;  
+            position: fixed;  
+            bottom: 0;  
+            width: 100%;  
+        } 
+ 
+        /* Add styling for the form */  
+        form {  
+            margin -top: 20px;  
+        } 
+ 
+        label {  
+            display: block;  
+            margin -bottom: 8px;  
+        } 
+ 
+        select {  
+            width: 100%;  
+            padding: 8px;  
+            margin -bottom: 16px;  
+        } 
+ 
+        button {  
+            background -color: #333;  
+            color: #fff;  
+            padding: 10px;  
+            border: none;  
+            cursor: pointer;  
+        } 
+ 
+        /* Style for displaying the predicted price */  
+        #predictedPrice {  
+            margin -top: 20px;  
+            font-weight: bo ld; 
+        } 
+    </style>  
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 45  
+ </head>  
+<body>  
+    <header>  
+        <h1>House Price Prediction</h1>  
+    </header>  
+    <main>  
+        <p>Welcome to House Price Prediction Model!</p>  
+ 
+        <!-- Form for input fields --> 
+         
+<form id="predictionForm">  
+    <label for="beds">Bedrooms:</label>  
+    <select id="beds" name="beds">  
+        <option value="" disabled selected>Select number of bedrooms</option>  
+        {% for bedroom in bedrooms %}  
+            <option value="{{ bedroom }}">{{ bedroom }}</option>  
+        {% endfor %}  
+    </select>  
+ 
+    <label for="baths">Baths:</label>  
+    <select id="baths" name="baths">  
+        <option value="" disabled selected>Select number of bathrooms</option>  
+        {% for bathroom in bathrooms %}  
+            <option value= "{{ bathroom }}">{{ bathroom }}</option>  
+        {% endfor %}  
+    </select>  
+ 
+    <label for="size">Size:</label>  
+    <select id="size" name="size">  
+        <option value="" disabled selected>Select size of the house</option>  
+        {% for house_size in sizes %}  
+            <option value="{{ house_size }}">{{ house_size }} sqft</option>  
+        {% endfor %}  
+    </select>  
+ 
+    <label for="zip_code">Zip Code:</label>  
+    <select id="zip_code" name="zip_code">  
+        <option value="" disabled selected>Select zip code</option>  
+        {% for zip_code in zip_codes %}  
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 46  
+             <option value="{{ zip_code }}">{{ zip_code }}</option>  
+        {% endfor %}  
+    </select>  
+ 
+    <!-- Predict Price button --> 
+    <button  type="button" onclick="sendData()">Predict Price</button>  
+ 
+    <!-- Space for displaying predicted price --> 
+    <div id="predictedPrice"></div>  
+</form>  
+ 
+    </main>  
+     
+    <!-- Add your JavaScript scripts or include external scripts here --> 
+    <scrip t> 
+        // JavaScript function to fetch options for dropdowns  
+        function fetchOptions(endpoint, dropdownId) {  
+            fetch(endpoint)  
+                .then(response => response.json())  
+                .then(data => {  
+                    const dropdown = document.getElementById(dropdownId);  
+                    dropdown.innerHTML = '<option value="" disabled selected>Select an 
+option</option>';  
+                    data.forEach(option => {  
+                        const op tionElement = document.createElement('option');  
+                        optionElement.value = option;  
+                        optionElement.textContent = option;  
+                        dropdown.appendChild(optionElement);  
+                    }); 
+                }); 
+        } 
+ 
+        // Fetch options for each dropdown on page load  
+        window.onload = function() {  
+            fetchOptions('/bedrooms', 'beds');  
+            fetchOptions('/bathrooms', 'baths');  
+            fetchOptions('/sizes', 'size');  
+            fetchOptions('/zip_codes', 'zip_code');  
+        }; 
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 47  
+  
+        // JavaScript function to send data and receive predicted price  
+        function sendData() {  
+            const form = document.getElementById('predictionForm');  
+            const formD ata = new FormData(form);  
+ 
+            fetch('/predict', {  
+                method: 'POST',  
+                body: formData  
+            }) 
+            .then(response => response.text())  
+            .then(price => {  
+                document.getElementById("predictedPrice").innerHTML = "Price: INR " + 
+price;  
+            }); 
+        } 
+    </script>  
+</body>  
+</html>  
+ 
+ 
+Main.py python file  
+Flask is used here  
+ 
+from flask import Flask, render_template, request, jsonify  
+import  pandas as pd  
+import pickle  
+ 
+app = Flask(__name__)  
+data = pd.read_csv('final_dataset.csv')  
+pipe = pickle.load(open("RidgeModel.pkl", 'rb'))  
+ 
+@app.route('/')  
+def index():  
+    bedrooms = sorted(data['beds'].unique())  
+    bathrooms = sorted(data['baths'].unique())  
+    sizes = sorted(data['size'].unique())  
+    zip_codes = sorted(data['zip_code'].unique())  
+ 
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 48  
+     return render_template('index.html', bedrooms=bedrooms, bathrooms=bathrooms, 
+sizes=sizes, zip_codes=zip_codes)  
+ 
+@app.route('/predict', methods=['POST'])  
+def predict():  
+    bedrooms = request.form.get('beds')  
+    bathrooms = request.form.get('baths')  
+    size = request.form.get('size')  
+    zipcode = request.form.get('zip_code')  
+ 
+    # Create a DataFrame with the inpu t data  
+    input_data = pd.DataFrame([[int(bedrooms), bathrooms, size, zipcode]],  
+                               columns=['beds', 'baths', 'size', 'zip_code'])  
+ 
+    print("Input Data:")  
+    print(input_data)  
+ 
+    # Handle unknown categories in the input data  
+    # for column in input_data.columns:  
+    #     unknown_categories = set(input_data[column]) - set(data[column].unique())  
+    #     if unknown_categories:  
+    #         # Handle unknown categories (e.g., replace with a default value)  
+    #         input_data[column] = input_data[column].replace(unknown_categories, 
+data[column].mode()[0])  
+ 
+    print("Processed Input Data:")  
+    print(input_data)  
+ 
+    # Predic t the price  
+    prediction = pipe.predict(input_data)[0]  
+    print(prediction,"*"*20)  
+ 
+    return str(prediction)  
+ 
+if __name__ == "__main__":  
+    app.run(debug=True, port=5000)  
+ 
+ 
+ 
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 49  
+  
+ 
+ 
+ 
+  Figure3.29 WebPage Display:  Prediction  Output  
+Final Web Interface  
+The above interface represents the final output of the House Price Prediction system, 
+deployed as a user -friendly web application. The design is clean and intuitive, enabling 
+users to easily input property -specific details and instantly receive a predicted  house 
+price. The main components of the interface are as follows:  
+1. Bedrooms:  
+This dropdown allows the user to select the number of bedrooms in the house. It is one of 
+the key features influencing the property value, as more bedrooms typically indicate a  
+larger, more valuable home.  
+2. Baths:  
+This field captures the total number of bathrooms. Like bedrooms, this is a significant 
+feature in determining price, as homes with more bathrooms are generally more desirable 
+and spacious.  
+ 
+ 
+
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 50  
+  
+3. Size:  
+This field take s the size of the house in square feet (sqft). Square footage is a direct 
+indicator of the property's area, which is one of the strongest predictors of house price. 
+The input is expected in float format to allow decimal precision.  
+4. Zip Code:  
+The location  or zip code of the property is a critical determinant of value. Different areas 
+have varying demand, infrastructure, safety levels, and school zones —all of which impact 
+the final price. The user selects the zip code from the dropdown to capture location -based 
+variability.  
+5. Predict Price Button:  
+Once all the fields are filled, clicking the “Predict Price” button triggers the machine 
+learning model in the backend. The model processes the input data, makes a prediction, 
+and outputs the estimated house price . 
+6. Predicted Price Output:  
+The predicted price is displayed just below the button. In this case, the result is shown as 
+“Price: INR 413869.2468…”, representing the estimated cost of the home based on the 
+inputs. The currency format can be adjusted depend ing on deployment region (e.g., USD, 
+EUR, INR).  
+This deployment is built using web development frameworks like Flask or Streamlit 
+(depending on your setup) and serves as an end -to-end integration of the trained machine 
+learning model into a usable, real -world application. It bridges the gap between data 
+science and user accessibility, allowing non -technical users to benefit from predictive 
+analytics in real estate decision -making.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 51  
+ 6.CONCLUSION  AND  FUTURE  WORK  
+ Conclusion:  
+In conclusion,  the successful development and deploymen t of the Polynomial 
+Regression  represent a significant milestone in house  sales prediction. By allowing 
+users to input start and end dates, as well as select specific drug categories, the 
+application provides tailored pr edictions to meet individual needs within the real-estate  
+industry.  
+ 
+Through the utilisation of machine lear ning techniques such polynomial regression, 
+the model generates accurate predictions by analysing historical sales data and 
+identifying patterns and trends. This empowers real-estate  companies to make 
+informed decisions regarding inventory management, resource allocation, and sales 
+strategies.  
+ 
+Overall, the House  Sales Prediction tool represents a significant advancement in house  
+sales  forecasting,  offering  a combination  of advanced  analytics  and user -centric design 
+to support the dynamic needs of the  industry.  By harnessing  the power  of machine 
+learning and deploying it through accessible platforms locally , this solution empowers 
+stakeholders to optimise their operations and drive business growth effectively.  
+ 
+ Future  Work:  
+1. Despite the results obtained have been satisfactory, it would be i nteresting to 
+see if, using a broader Database than that was used in the work, the results 
+obtained could have a precision that could be considered even more acceptable. 
+The inclusion of a broader Database (for example, adding more techniques for 
+data visu alisation, analysis) in the sales , the house  distribution companies may 
+achieve a greater room for inventory management as well.  
+2. Explore time series analysis techniques to capture  seasonal  patterns,  trends,  and 
+other temporal dependencies in the sales data.  Implement advanced time series 
+forecasting models such as ARIMA, SARIMA, Prophet, or LSTM networks to 
+improve the accuracy of sales predictions.  
+3. Deploy the model on cloud platforms like AWS, Azure  ,or Google  Cloud  Plat 
+form  to make it accessible from  anywhere  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 776388  
+ 
+ Reference  
+GTU  
+ SVBIT  
+ 52  
+ REFERENCES  
+1. Python Machine Learning – By Sebastian Raschka & Vahid Mirjalili  
+Great for understanding practical machine learning workflows and data 
+preprocessing techniques.  
+2. Hands -On Machine Learning with Scikit -Learn, Keras, and TensorFlow  – 
+Explains model building, tuning, and deployment concepts with real -life 
+examples.  
+3. Data Science for Business – By Foster Provost & Tom Fawcett  
+Useful for linking data science workflows to real -world decision -making, 
+including topics like predictive model ing in domains like housing  
+4. Applied Predictive Modeling – By Max Kuhn & Kjell Johnson  
+Focuses on model selection, tuning, and evaluation techniques.  
+5. The Elements of Statistical Learning – By Trevor Hastie, Robert Tibshira  
+Theoretical grounding in predictiv e modeling and regression -based methods 
+used in house price prediction  
+ 
+1. Scikit -learn Documentation (official):  
+https://scikit -learn.org/stable/user_guide.html  
+Covers model selection, feature engineering, and evaluation techniques used in 
+predictive pipelines.  
+2. Towards Data Science (Medium Blog):  
+https://towardsdatascience.com/  
+Search for “house price prediction,” “model pipeline,” or “feature engineering” for 
+practical tutorials.  
+3. Kaggle (Datase ts & Notebooks):  
+https://www.kaggle.com/c/house -prices -advanced -regression -techniques  
+Includes full data science pipelines on housing price prediction, including EDA, 
+preprocessing, and model tuning.  
+4. Analytics Vidhya:  
+https://www.analyticsvidhya.com/  
+Offers beginner -to-advanced tutorials and case studies on ML workflows and 
+deployment strategies.  
+ 
